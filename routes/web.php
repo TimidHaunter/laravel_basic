@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// 视图路由
 Route::get('/', function () {
     return view('welcome');
 });
