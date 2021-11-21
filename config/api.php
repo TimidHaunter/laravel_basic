@@ -160,6 +160,7 @@ return [
     /*
     |--------------------------------------------------------------------------
     | Authentication Providers
+    | 认证服务
     |--------------------------------------------------------------------------
     |
     | The authentication providers that should be used when attempting to
@@ -174,6 +175,7 @@ return [
     /*
     |--------------------------------------------------------------------------
     | Throttling / Rate Limiting
+    | 访问节流，控制频率
     |--------------------------------------------------------------------------
     |
     | Consumers of your API can be limited to the amount of requests they can

@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// 使用dingo api 路由
+$api = app('Dingo\Api\Routing\Router');
+
+$api->version('v1', function ($api) {
+    $api->get('test', [\App\Http\Controllers\TestController::class, 'index']);
+
+    // 命名路由
+    $api->get('name', ['as' => 'test.name', 'uses' => '\App\Http\Controllers\TestController@name']);
 });
