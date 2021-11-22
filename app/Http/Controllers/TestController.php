@@ -14,6 +14,13 @@ class TestController extends Controller
     public function name()
     {
         $url = app('Dingo\Api\Routing\UrlGenerator')->version('v1')->route('test.name');
+
         dd($url);
     }
+
+    public function show()
+    {
+        echo 'users';
+    }
 }
+
