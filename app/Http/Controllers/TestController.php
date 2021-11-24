@@ -70,5 +70,46 @@ class TestController extends Controller
     {
         echo 'users';
     }
+
+    public function login()
+    {
+//        $email = $request->input('email');
+//        $password = $request->input('password');
+
+//        dd(bcrypt('357159'));
+
+        $credentials = request(['email', 'password']);
+//        dd($credentials);
+        if (!$token = auth('api')->attempt($credentials)) {
+//            return response()->json(['error' => 'Unauthorized'], 401);
+
+            return $this->response->errorUnauthorized();
+        }
+
+        return $this->respondWithToken($token);
+    }
+
+    /**
+     * 需要添加 jwt 认证
+     */
+    public function users()
+    {
+        // 所有用户
+//        $users = User::all();
+//        return $this->response->collection($users, new UserTransformer());
+
+        // 从 Token 获取用户信息
+        $user = app('Dingo\Api\Auth\Auth')->user();
+        return $user;
+    }
+
+    private function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+            'expires_in' => auth('api')->factory()->getTTL() * 60
+        ]);
+    }
 }
 
