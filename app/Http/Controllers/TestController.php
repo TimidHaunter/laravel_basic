@@ -111,5 +111,22 @@ class TestController extends Controller
             'expires_in' => auth('api')->factory()->getTTL() * 60
         ]);
     }
+
+    // 内部调用
+    public function inner()
+    {
+        // 内部分发器
+        $dispatcher = app('Dingo\Api\Dispatcher');
+        // 请求内部接口 api/test
+//        $users = $dispatcher->get('api/test');
+
+        // 有些内部接口需要认证，登录后才能访问
+//        $users = $dispatcher->get('api/users');
+
+        // 模拟用户 be( 用户实例 )
+        $user = User::find(1);
+        $users = $dispatcher->be($user)->get('api/users');
+        return $users;
+    }
 }
 

@@ -18,7 +18,10 @@ use Illuminate\Support\Facades\Route;
 $api = app('Dingo\Api\Routing\Router');
 
 // api 404，检查配置文件.env
-$api->version('v1', function ($api) {
+
+// 节流，加入中间件 ['middleware' => 'api.throttle', 'limit' => 100, 'expires' => 5]
+
+$api->version('v1', ['middleware' => 'api.throttle', 'limit' => 100, 'expires' => 1], function ($api) {
     $api->get('users', 'App\Http\Controllers\TestController@show');
 
     $api->get('test', [\App\Http\Controllers\TestController::class, 'index']);
@@ -34,6 +37,9 @@ $api->version('v1', function ($api) {
         $api->get('users', [\App\Http\Controllers\TestController::class, 'users']);
     });
 
+
+    // 内部调用
+    $api->get('inner', [\App\Http\Controllers\TestController::class, 'inner']);
 });
 
 
