@@ -7,7 +7,7 @@ use App\Transformers\UserTransformer;
 use Illuminate\Http\Request;
 //use Symfony\Component\HttpKernel\Exception\UnsupportedMediaTypeHttpException;
 
-class TestController extends Controller
+class TestController extends BaseController
 {
     public function index(Request $request)
     {
