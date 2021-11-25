@@ -128,5 +128,18 @@ class TestController extends Controller
         $users = $dispatcher->be($user)->get('api/users');
         return $users;
     }
+
+    /**
+     * api 版本
+     * 需要在 HTTP header 头增加 Accept:application/vnd.YOUR_SUBTYPE.v1+json
+     * vnd=.env API_STANDARDS_TREE
+     * YOUR_SUBTYPE=.env API_SUBTYPE
+     */
+
+    public function inner2()
+    {
+        $user = User::find(2);
+        return $user;
+    }
 }
 

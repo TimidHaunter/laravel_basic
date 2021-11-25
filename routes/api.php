@@ -42,4 +42,8 @@ $api->version('v1', ['middleware' => 'api.throttle', 'limit' => 100, 'expires' =
     $api->get('inner', [\App\Http\Controllers\TestController::class, 'inner']);
 });
 
+$api->version('v2', function($api){
+    $api->get('inner2', [\App\Http\Controllers\TestController::class, 'inner2']);
+});
+
 
