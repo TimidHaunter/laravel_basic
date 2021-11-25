@@ -71,6 +71,19 @@ class TestController extends Controller
         echo 'users';
     }
 
+    /**
+     * 登录
+     *
+     * 使用 `email` 和 `password` 登录。
+     *
+     * @Post("/login")
+     * @Versions({"v1"})
+     * @Transaction({
+     *      @Request({"email": "yintian_129@126.com", "password": "123456"}),
+     *      @Response(200, body={"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2FjbC5sYXJhdmVsX2Jhc2ljLmNvbVwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNzg1MjU3MiwiZXhwIjoxNjM3ODU2MTcyLCJuYmYiOjE2Mzc4NTI1NzIsImp0aSI6Ing4UjlGdnBxMnFjNWxTcHoiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Ea6nJvhkL7TkR6MRfUdv65n_fyj-lw4KiILHSKsWhBU","token_type":"Bearer","expires_in":3600}),
+     *      @Response(401, body={"error": {"username": {"Username is already taken."}}})
+     * })
+     */
     public function login()
     {
 //        $email = $request->input('email');
