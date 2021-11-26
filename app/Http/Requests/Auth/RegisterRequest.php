@@ -27,10 +27,10 @@ class RegisterRequest extends BaseRequest
     {
         // 字段名.规则 => 提示语
         return [
-            'name.required' => '昵称 不能为空。',
-            'email.required' => '邮箱 不能为空。',
+            'name.required' => '昵称不能为空。',
+            'email.required' => '邮箱不能为空。',
             'email.email' => '请输入正确的邮箱地址。',
-            'email.unique:users' => '邮箱 已经被注册。'
+            'email.unique' => '邮箱已经被注册。'
         ];
     }
 }
