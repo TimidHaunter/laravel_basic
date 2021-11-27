@@ -41,7 +41,7 @@ class LoginController extends BaseController
      */
     public function refresh()
     {
-        return $this->respondWithToken('api')->refresh();
+        return $this->respondWithToken(auth('api')->refresh());
     }
 
     /**
