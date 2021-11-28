@@ -22,28 +22,34 @@ $api = app('Dingo\Api\Routing\Router');
 // 节流，加入中间件 ['middleware' => 'api.throttle', 'limit' => 100, 'expires' => 5]
 
 $api->version('v1', ['middleware' => 'api.throttle', 'limit' => 100, 'expires' => 1], function ($api) {
-    $api->get('users', 'App\Http\Controllers\TestController@show');
 
-    $api->get('test', [\App\Http\Controllers\TestController::class, 'index']);
+    $api->group(['prefix' => 'test'], function ($api) {
+        $api->get('users', 'App\Http\Controllers\TestController@show');
 
-    // 命名路由
-    $api->get('name', ['as' => 'test.name', 'uses' => 'App\Http\Controllers\TestController@name']);
+        $api->get('test', [\App\Http\Controllers\TestController::class, 'index']);
 
-    // 登录
-    $api->post('login', [\App\Http\Controllers\TestController::class, 'login']);
+        // 命名路由
+        $api->get('name', ['as' => 'test.name', 'uses' => 'App\Http\Controllers\TestController@name']);
+
+        // 登录
+        $api->post('login', [\App\Http\Controllers\TestController::class, 'login']);
+    });
 
     // 开启api jwt的路由
-    $api->group(['middleware' => 'api.auth'], function ($api){
+    $api->group(['prefix' => 'test', 'middleware' => 'api.auth'], function ($api){
         $api->get('users', [\App\Http\Controllers\TestController::class, 'users']);
     });
 
-
-    // 内部调用
-    $api->get('inner', [\App\Http\Controllers\TestController::class, 'inner']);
+    $api->group(['prefix' => 'test'], function ($api){
+        // 内部调用
+        $api->get('inner', [\App\Http\Controllers\TestController::class, 'inner']);
+    });
 });
 
 $api->version('v2', function($api){
-    $api->get('inner2', [\App\Http\Controllers\TestController::class, 'inner2']);
+    $api->group(['prefix' => 'test'], function ($api) {
+        $api->get('inner2', [\App\Http\Controllers\TestController::class, 'inner2']);
+    });
 });
 
 

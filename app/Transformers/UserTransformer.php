@@ -16,7 +16,7 @@ class UserTransformer extends TransformerAbstract
             'id'          => $user->id,
             'name'        => $user->name,
             'email'       => $user->email,
-            'transformer' => 'transformer'
+            'created_at'  => $user->created_at ? $user->created_at : '时间遥远'
         ];
     }
 }
