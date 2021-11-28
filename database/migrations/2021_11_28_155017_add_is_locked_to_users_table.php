@@ -13,13 +13,13 @@ class AddIsLockedToUsersTable extends Migration
      */
     public function up()
     {
-//        Schema::table('users', function (Blueprint $table) {
-//            $table
-//                ->tinyInteger('is_locked')
-//                ->default(0)
-//                ->after('email')
-//                ->comment('用户禁用状态：0启用；1禁用');
-//        });
+        Schema::table('users', function (Blueprint $table) {
+            $table
+                ->tinyInteger('is_locked')
+                ->default(0)
+                ->after('email')
+                ->comment('用户禁用状态：0启用、1禁用');
+        });
     }
 
     /**
