@@ -18,6 +18,12 @@ class LoginController extends BaseController
             return $this->response->errorUnauthorized();
         }
 
+        // 检查用户状态
+        $user = auth('api')->user();
+        if ($user->is_locked == 1) {
+            return $this->response->errorForbidden('用户被锁定');
+        }
+
         return $this->respondWithToken($token);
     }
 
@@ -58,7 +64,7 @@ class LoginController extends BaseController
         return $this->response->array([
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60
+            'expires_in' => auth('api')->factory()->getTTL() * 6000
         ]);
     }
 }

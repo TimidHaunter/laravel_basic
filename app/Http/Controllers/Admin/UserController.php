@@ -35,17 +35,20 @@ class UserController extends BaseController
 
     /**
      * 用户详情
+     * 注入路由模型
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return $this->response->item($user, new UserTransformer());
     }
 
     /**
      * 禁、启用用户
      */
-    public function lock()
+    public function lock(User $user)
     {
-
+        $user->is_locked = $user->is_locked == 0 ? 1 : 0;
+        $user->save();
+        return $this->response->noContent();
     }
 }
