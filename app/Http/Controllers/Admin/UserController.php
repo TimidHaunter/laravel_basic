@@ -11,14 +11,13 @@ class UserController extends BaseController
 {
     /**
      * 用户列表
-     * @param Request $request
-     * @return \Dingo\Api\Http\Response
      */
     public function index(Request $request)
     {
-        // 搜索，todo 获取不到参数
-        $name = $request->input('name');
+        // 搜索，todo get获取不到参数
+        $name = $request->get('name');
         $email = $request->input('email');
+//        dd($request);
 
         $pageSize = 2;
         // 闭包用到外部变量 $name，需要使用 use 传参进来

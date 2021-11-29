@@ -64,7 +64,7 @@ class LoginController extends BaseController
         return $this->response->array([
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 6000
+            'expires_in' => auth('api')->factory()->getTTL() * 60 * 10000
         ]);
     }
 }

@@ -21,7 +21,7 @@ $api->version('v1', $params, function ($api){
             /**
              * 用户管理
              */
-            // 用户管理资源路由
+            // 用户管理资源路由，只用index和show路由
             $api->resource('users', \App\Http\Controllers\Admin\UserController::class, [
                 'only' => [
                     'index',
@@ -30,8 +30,17 @@ $api->version('v1', $params, function ($api){
             ]);
             // 禁、启用用户
             $api->patch('users/{user}/lock', [\App\Http\Controllers\Admin\UserController::class, 'lock']);
+
+
+            /**
+             * 分类管理
+             */
+            // 分类管理资源路由，排除掉destroy
+            $api->resource('category', \App\Http\Controllers\Admin\CategoryController::class, [
+                'except' => [
+                    'destroy'
+                ]
+            ]);
         });
-
-
     });
 });

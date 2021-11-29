@@ -5,7 +5,7 @@
 
 - 配置和目录结构
   - 安装laravel
-cd 到当前目录执行以下命令，blog为项目名称
+  cd 到当前目录执行以下命令，blog为项目名称
 > composer create-project --prefer-dist laravel/laravel blog
 
 - 配置
@@ -174,4 +174,23 @@ composer require dingo/api
 ## 包
 > composer require liyu/dingo-serializer-switch
 dingo 返回数据，减少 transformer 包裹层
+
+## 自动加载
+> helper.php
+
+```json
+"files": [
+    "helpers.php"
+]
+```
+composer dump-autoload
+
+## 缓存
+默认是文件缓存
+`config/cache.php`
+```php
+<?php
+'default' => env('CACHE_DRIVER', 'file'),
+```
+
 
