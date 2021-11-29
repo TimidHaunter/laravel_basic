@@ -28,7 +28,7 @@ $api->version('v1', $params, function ($api){
                     'show'
                 ]
             ]);
-            // 禁、启用用户
+            // 用户禁、启用
             $api->patch('users/{user}/lock', [\App\Http\Controllers\Admin\UserController::class, 'lock']);
 
 
@@ -41,6 +41,9 @@ $api->version('v1', $params, function ($api){
                     'destroy'
                 ]
             ]);
+
+            // 分类禁、启用
+            $api->patch('category/{category}/status', [\App\Http\Controllers\Admin\CategoryController::class, 'status']);
         });
     });
 });

@@ -30,6 +30,50 @@ class CategoryController extends BaseController
      */
     public function store(Request $request)
     {
+        $insertData = $this->checkInput($request);
+
+        if (!is_array($insertData)) return $insertData;
+
+        Category::create($insertData);
+
+        return $this->response->created();
+    }
+
+    /**
+     * 分类详情
+     */
+    public function show(Category $category)
+    {
+        return $category;
+    }
+
+    /**
+     * 分类更新
+     */
+    public function update(Request $request, Category $category)
+    {
+        $updateData = $this->checkInput($request);
+
+        if (!is_array($updateData)) return $updateData;
+
+        $category->update($updateData);
+
+        return $this->response->noContent();
+    }
+
+    /**
+     * 分类禁、启用
+     */
+    public function status(Category $category)
+    {
+        $category->status = $category->status == 1 ? 0 : 1;
+        $category->save();
+
+        return $this->response->noContent();
+    }
+
+    protected function checkInput($request)
+    {
         // 验证参数
         $request->validate([
             'name' => 'required|max:16'
@@ -48,48 +92,10 @@ class CategoryController extends BaseController
             return $this->response->errorBadRequest('不能超过三级分类');
         }
 
-        $insertData = [
+        return [
             'name' => $request->input('name'),
             'pid' => $pid,
             'level' => $level
         ];
-
-        Category::create($insertData);
-
-        // 刷新缓存
-        forget_cache_category();
-
-        return $this->response->created();
-    }
-
-    /**
-     * 分类详情
-     */
-    public function show(Category $category)
-    {
-        return $category;
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

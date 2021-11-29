@@ -193,4 +193,19 @@ composer dump-autoload
 'default' => env('CACHE_DRIVER', 'file'),
 ```
 
+## postman
+> post 默认参数使用 Boby x-www-form-urlencoded
+
+## 观察者
+> php artisan make:observer CategoryObser --model=Category
+在服务容器里注册
+`Providers/AppServiceProvider.php`
+```php
+<?php
+public function boot()
+{
+    // 观察Category模型事件
+    Category::observe(CategoryObserver::class);
+}
+```
 
