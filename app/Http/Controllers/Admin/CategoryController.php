@@ -14,10 +14,15 @@ class CategoryController extends BaseController
      */
     public function index(Request $request)
     {
-//        $pid = $request->input('pid');
+        // todo 获取不到 get 的 type 参数
+        $type = $request->input('type', 'all');
 //        dd($request);
 
-        return cache_categoryTree_all();
+        if ($type == 'all') {
+            return cache_categoryTree_all();
+        } else {
+            return cache_categoryTree_enable();
+        }
     }
 
     /**
@@ -58,14 +63,11 @@ class CategoryController extends BaseController
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * 分类详情
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        return $category;
     }
 
     /**
