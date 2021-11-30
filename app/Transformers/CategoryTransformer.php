@@ -13,8 +13,8 @@ class CategoryTransformer extends TransformerAbstract
     {
         // 自定义响应格式
         return [
-            'id'          => $category->category_id,
-            'name'        => $category->name
+            'id'   => $category->category_id,
+            'name' => $category->name
         ];
     }
 }

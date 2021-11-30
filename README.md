@@ -223,3 +223,13 @@ public function boot()
         return $this->belongsTo(Category::class, 'category_id');
     }
 ```
+
+## transformer
+在 Transformer 里关联外部数据，比如Good商品只有category_id和user_id，如果需要分类名和用户名需要关联查表。在 Transformer 里可以轻易通过
+```php
+<?php
+    public function includeUser(User $user)
+    {
+        return $this->item($user->user, new UserTransformer());
+    }
+```

@@ -6,6 +6,7 @@ namespace App\Transformers;
 
 use App\Models\Category;
 use App\Models\Good;
+use App\Models\User;
 use League\Fractal\TransformerAbstract;
 
 class GoodTransformer extends TransformerAbstract
@@ -38,5 +39,13 @@ class GoodTransformer extends TransformerAbstract
     public function includeCategory(Good $good)
     {
         return $this->item($good->category, new CategoryTransformer());
+    }
+
+    /**
+     * 额外的用户数据
+     */
+    public function includeUser(User $user)
+    {
+        return $this->item($user->user, new UserTransformer());
     }
 }

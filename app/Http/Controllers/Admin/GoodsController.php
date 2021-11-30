@@ -17,7 +17,27 @@ class GoodsController extends BaseController
      */
     public function index(Request $request)
     {
-        $goods = Good::paginate();
+        // 搜索
+        $title = $request->query('title');
+        $category_id = $request->query('category_id');
+        // 不传参的时候默认FALSE
+        $is_on = $request->query('is_on', false);
+        $is_recommend = $request->query('is_recommend', false);
+
+        $goods = Good::when($title, function ($query) use ($title){
+                $query->where('title', 'like', "%$title%");
+            })
+            ->when($category_id, function ($query) use ($category_id){
+                $query->where('category_id', $category_id);
+            })
+            // 是否上架，0、1都可以传递过来。不然0就传递不过来
+            ->when($is_on !== false, function ($query) use ($is_on){
+                $query->where('is_on', $is_on);
+            })
+            ->when($is_recommend !== false, function ($query) use ($is_recommend){
+                $query->where('is_recommend', $is_recommend);
+            })
+            ->paginate(2);
         return $this->response->paginator($goods, new GoodTransformer);
     }
 
