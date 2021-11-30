@@ -197,6 +197,7 @@ composer dump-autoload
 > post 默认参数使用 Boby x-www-form-urlencoded
 
 ## 观察者
+(事件，观察者)[https://www.cnblogs.com/mouseleo/p/8668001.html]
 > php artisan make:observer CategoryObser --model=Category
 在服务容器里注册
 `Providers/AppServiceProvider.php`
@@ -209,3 +210,8 @@ public function boot()
 }
 ```
 
+## 模型
+> php artisan make:model Good -m // 创建模型的同时创建迁移文件
+> php artisan make:model Good -mc // 还要创建控制器，但是没有办法指定路径
+
+## 

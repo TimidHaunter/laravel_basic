@@ -20,7 +20,11 @@ $api->version('v1', $params, function ($api){
         $api->group(['middleware' => 'api.auth'], function($api){
             /**
              * 用户管理
+             * 单个路由要写在资源路由上面，防止被覆盖
              */
+            // 用户禁、启用
+            $api->patch('users/{user}/lock', [\App\Http\Controllers\Admin\UserController::class, 'lock']);
+
             // 用户管理资源路由，只用index和show路由
             $api->resource('users', \App\Http\Controllers\Admin\UserController::class, [
                 'only' => [
@@ -28,13 +32,15 @@ $api->version('v1', $params, function ($api){
                     'show'
                 ]
             ]);
-            // 用户禁、启用
-            $api->patch('users/{user}/lock', [\App\Http\Controllers\Admin\UserController::class, 'lock']);
+
 
 
             /**
              * 分类管理
              */
+            // 分类禁、启用
+            $api->patch('category/{category}/status', [\App\Http\Controllers\Admin\CategoryController::class, 'status']);
+
             // 分类管理资源路由，排除掉destroy
             $api->resource('category', \App\Http\Controllers\Admin\CategoryController::class, [
                 'except' => [
@@ -42,8 +48,27 @@ $api->version('v1', $params, function ($api){
                 ]
             ]);
 
-            // 分类禁、启用
-            $api->patch('category/{category}/status', [\App\Http\Controllers\Admin\CategoryController::class, 'status']);
+
+
+            /**
+             * 商品管理
+             */
+            // 商品上架
+            $api->patch('goods/{goods}/on', [\App\Http\Controllers\Admin\GoodsController::class, 'isOn']);
+
+            // 商品推荐
+            $api->patch('goods/{goods}/recommend', [\App\Http\Controllers\Admin\GoodsController::class, 'isRecommend']);
+
+            // 商品管理资源路由
+            $api->resource('goods', \App\Http\Controllers\Admin\GoodsController::class, [
+                'except' => [
+                    'destroy'
+                ]
+            ]);
+
+
+
+
         });
     });
 });
