@@ -11,7 +11,7 @@ use League\Fractal\TransformerAbstract;
 
 class GoodTransformer extends TransformerAbstract
 {
-    protected $availableIncludes = ['category'];
+    protected $availableIncludes = ['category', 'user'];
 
     public function transform(Good $good)
     {

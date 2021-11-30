@@ -67,34 +67,49 @@ class GoodsController extends BaseController
     }
 
     /**
+     * GET
      * 商品详情
      */
-    public function show($id)
+    public function show(Good $good)
     {
-        //
+        return $this->response->item($good, new GoodTransformer());
     }
 
     /**
      * 商品编辑
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Good $good)
     {
-        //
+        $category = Category::find($request->category_id);
+
+        if (!$category) return $this->response->errorBadRequest('分类不存在');
+        if ($category->status==0) return $this->response->errorBadRequest('分类被禁用');
+        if ($category->level != 3) return $this->response->errorBadRequest('只能向三级分类添加商品');
+
+        $good->update($request->all());
+        return $this->response->noContent();
     }
 
     /**
+     * PATCH
      * 商品上架
      */
-    public function isOn()
+    public function isOn(Good $good)
     {
+        $good->is_on = $good->is_on == 0 ? 1 : 0;
+        $good->save();
 
+        return $this->response->noContent();
     }
 
     /**
      * 商品推荐
      */
-    public function isRecommend()
+    public function isRecommend(Good $good)
     {
+        $good->is_recommend = $good->is_recommend == 0 ? 1 : 0;
+        $good->save();
 
+        return $this->response->noContent();
     }
 }

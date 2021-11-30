@@ -54,10 +54,10 @@ $api->version('v1', $params, function ($api){
              * 商品管理
              */
             // 商品上架
-            $api->patch('goods/{goods}/on', [\App\Http\Controllers\Admin\GoodsController::class, 'isOn']);
+            $api->patch('good/{good}/on', [\App\Http\Controllers\Admin\GoodsController::class, 'isOn']);
 
             // 商品推荐
-            $api->patch('goods/{goods}/recommend', [\App\Http\Controllers\Admin\GoodsController::class, 'isRecommend']);
+            $api->patch('good/{good}/recommend', [\App\Http\Controllers\Admin\GoodsController::class, 'isRecommend']);
 
             // 商品管理资源路由
             $api->resource('goods', \App\Http\Controllers\Admin\GoodsController::class, [
