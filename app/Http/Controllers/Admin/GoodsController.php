@@ -76,6 +76,7 @@ class GoodsController extends BaseController
     }
 
     /**
+     * PUT
      * 商品编辑
      */
     public function update(Request $request, Good $good)
