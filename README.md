@@ -214,4 +214,12 @@ public function boot()
 > php artisan make:model Good -m // 创建模型的同时创建迁移文件
 > php artisan make:model Good -mc // 还要创建控制器，但是没有办法指定路径
 
-## 
+## 模型关联
+> app/Models/Good.php
+```php
+<?php
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+```

@@ -6,16 +6,19 @@ use App\Http\Controllers\BaseController;
 use App\Http\Requests\Admin\GoodsRequest;
 use App\Models\Category;
 use App\Models\Good;
+use App\Transformers\GoodTransformer;
 use Illuminate\Http\Request;
 
 class GoodsController extends BaseController
 {
     /**
+     * GET
      * 商品列表
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $goods = Good::paginate();
+        return $this->response->paginator($goods, new GoodTransformer);
     }
 
     /**

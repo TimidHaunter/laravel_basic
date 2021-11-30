@@ -13,6 +13,7 @@ class GoodsRequest extends BaseRequest
     {
         return [
             'category_id' => 'required',
+            'title' => 'required|max:255',
             'description' => 'required|max:255',
             'price' => 'required|min:0',
             'stock' => 'required|min:0',

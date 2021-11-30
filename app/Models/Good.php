@@ -10,7 +10,7 @@ class Good extends Model
     use HasFactory;
 
     // 可批量赋值的字段
-    protected $fillable = ['user_id', 'category_id', 'description', 'price', 'stock', 'cover', 'pics', 'is_on', 'is_recommend', 'details'];
+    protected $fillable = ['user_id', 'category_id', 'title', 'description', 'price', 'stock', 'cover', 'pics', 'is_on', 'is_recommend', 'details'];
 
     /**
      * 强制属性转换
@@ -18,4 +18,12 @@ class Good extends Model
     protected $casts = [
         'pics' => 'array',
     ];
+
+    /**
+     * 创建商品和分类的关联
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }

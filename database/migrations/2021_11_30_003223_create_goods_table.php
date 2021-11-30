@@ -17,6 +17,7 @@ class CreateGoodsTable extends Migration
             $table->id();
             $table->integer('user_id')->comment('创建者');
             $table->integer('category_id')->comment('分类ID');
+            $table->string('title')->comment('标题');
             $table->string('description')->comment('描述');
             $table->integer('price')->comment('价格');
             $table->integer('stock')->comment('库存');
