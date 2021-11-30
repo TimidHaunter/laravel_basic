@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Admin\GoodsRequest;
+use App\Models\Category;
 use App\Models\Good;
 use Illuminate\Http\Request;
 
@@ -23,6 +24,13 @@ class GoodsController extends BaseController
      */
     public function store(GoodsRequest $request)
     {
+        // 对分类进行检查，必须是level=3分类，并且分类不能被禁用
+        $category = Category::find($request->category_id);
+        if (!$category) return $this->response->errorBadRequest('分类不存在');
+        if ($category->status==0) return $this->response->errorBadRequest('分类被禁用');
+        if ($category->level != 3) return $this->response->errorBadRequest('只能向三级分类添加商品');
+
+
         $user_id = auth('api')->id();
 //        dd($user_id);
 //        $insertData = $request->all();
