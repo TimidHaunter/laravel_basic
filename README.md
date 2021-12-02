@@ -239,4 +239,4 @@ public function boot()
 
 [Web直传](https://help.aliyun.com/document_detail/31927.html?spm=a2c4g.11186623.2.10.5602668eApjlz3#concept-qp2-g4y-5db)
 
-
+后端接口提供AccessKey一系列参数，并且返回签名，前端用js上传至阿里云OSS
