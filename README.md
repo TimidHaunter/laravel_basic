@@ -233,3 +233,10 @@ public function boot()
         return $this->item($user->user, new UserTransformer());
     }
 ```
+
+## Laravel接入阿里OSS
+> composer require "iidestiny/laravel-filesystem-oss"
+
+[Web直传](https://help.aliyun.com/document_detail/31927.html?spm=a2c4g.11186623.2.10.5602668eApjlz3#concept-qp2-g4y-5db)
+
+

@@ -15,6 +15,11 @@ class GoodTransformer extends TransformerAbstract
 
     public function transform(Good $good)
     {
+        $pics_url = [];
+        foreach ($good->pics as $p) {
+            array_push($pics_url, oss_url($p));
+        }
+
         // 自定义响应格式
         return [
             'category_id' => $good->category_id,
@@ -24,7 +29,9 @@ class GoodTransformer extends TransformerAbstract
             'price' => $good->price,
             'stock' => $good->stock,
             'cover' => $good->cover,
+            'cover_url' => oss_url($good->cover), // 域名拼接
             'pics' => $good->pics,
+            'pics_url' => $pics_url,
             'is_on' => $good->is_on,
             'is_recommend' => $good->is_recommend,
             'details' => $good->details,

@@ -69,3 +69,15 @@ if(!function_exists('forget_cache_category')){
         cache()->forget('cache_categoryTree_all');
     }
 }
+
+/**
+ * 获取阿里云OSS域名
+ * todo 是否要加斜杠，是否HTTPS，是否一系列的考虑，这里简单写一个
+ */
+if(!function_exists('oss_url'))
+{
+    function oss_url($key)
+    {
+        return config('filesystems')['disks']['oss']['bucket_url'] . '/' . $key;
+    }
+}

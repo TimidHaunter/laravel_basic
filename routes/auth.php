@@ -18,6 +18,9 @@ $api->version('v1', ['middleware' => 'api.throttle', 'limit' => 60, 'expires' =>
         $api->post('logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout']);
         // 用户刷新 token
         $api->post('refresh', [\App\Http\Controllers\Auth\LoginController::class, 'refresh']);
+
+        // 阿里云OSS Token
+        $api->get('oss/token', [\App\Http\Controllers\Auth\OssController::class, 'token']);
     });
 
 });
