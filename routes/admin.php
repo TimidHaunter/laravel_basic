@@ -12,12 +12,12 @@ $params = [
     'expires' => 1
 ];
 
-$api->version('v1', $params, function ($api){
+$api->version('v1', $params, function ($api) {
 
-    $api->group(['prefix' => 'admin'], function($api){
+    $api->group(['prefix' => 'admin'], function ($api) {
 
         // 需要登录的路由
-        $api->group(['middleware' => 'api.auth'], function($api){
+        $api->group(['middleware' => 'api.auth'], function ($api) {
             /**
              * 用户管理
              * 单个路由要写在资源路由上面，防止被覆盖
@@ -34,7 +34,6 @@ $api->version('v1', $params, function ($api){
             ]);
 
 
-
             /**
              * 分类管理
              */
@@ -47,7 +46,6 @@ $api->version('v1', $params, function ($api){
                     'destroy'
                 ]
             ]);
-
 
 
             /**
@@ -67,8 +65,16 @@ $api->version('v1', $params, function ($api){
             ]);
 
 
+            /**
+             * 评价管理
+             */
 
-
+            // 评价列表
+            $api->get('comments', [\App\Http\Controllers\Admin\CommentController::class, 'index']);
+            // 评价详情
+            $api->get('comments/{comment}', [\App\Http\Controllers\Admin\CommentController::class, 'show']);
+            // 评价回复
+            $api->get('comments/{comment}/reply', [\App\Http\Controllers\Admin\CommentController::class, 'reply']);
         });
     });
 });

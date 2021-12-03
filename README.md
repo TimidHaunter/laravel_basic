@@ -15,6 +15,10 @@
 
 - 目录结构
 
+## composer.json
+> composer install
+安装composer文件，自动下载
+
 ## Dingo api
 > 如果开发纯api的项目，可以安装dingo api
 ```shell
