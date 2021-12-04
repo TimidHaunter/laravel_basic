@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 class CommentController extends BaseController
 {
     /**
+     * GET
      * 评价列表
      */
     public function index(Request $request)
@@ -34,11 +35,12 @@ class CommentController extends BaseController
     }
 
     /**
+     * GET
      * 评价详情
      */
-    public function show()
+    public function show(Comment $comment)
     {
-
+        return $this->response->item($comment, new CommentTransformer());
     }
 
     /**
