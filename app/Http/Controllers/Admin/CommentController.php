@@ -44,11 +44,22 @@ class CommentController extends BaseController
     }
 
     /**
+     * PATCH
      * 评价回复
      */
-    public function reply()
+    public function reply(Request $request, Comment $comment)
     {
+        $request->validate([
+            'reply' => 'required|max:255'
+        ], [
+            'reply.required' => '回复不能为空',
+            'reply.max'      => '回复不能超过255字符'
+        ]);
 
+        // 更新回复
+        $comment->reply = $request->input('reply');
+        $comment->save();
+        return $this->response->noContent();
     }
 
 }

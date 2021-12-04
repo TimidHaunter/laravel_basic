@@ -73,8 +73,8 @@ $api->version('v1', $params, function ($api) {
             $api->get('comments', [\App\Http\Controllers\Admin\CommentController::class, 'index']);
             // 评价详情
             $api->get('comments/{comment}', [\App\Http\Controllers\Admin\CommentController::class, 'show']);
-            // 评价回复
-            $api->get('comments/{comment}/reply', [\App\Http\Controllers\Admin\CommentController::class, 'reply']);
+            // 评价回复，更新使用patch
+            $api->patch('comments/{comment}/reply', [\App\Http\Controllers\Admin\CommentController::class, 'reply']);
         });
     });
 });
