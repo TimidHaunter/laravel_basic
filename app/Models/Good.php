@@ -34,4 +34,12 @@ class Good extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    /**
+     * 商品的所有评价
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'goods_id', 'id');
+    }
 }

@@ -5,13 +5,14 @@ namespace App\Transformers;
 
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Good;
 use App\Models\User;
 use League\Fractal\TransformerAbstract;
 
 class GoodTransformer extends TransformerAbstract
 {
-    protected $availableIncludes = ['category', 'user'];
+    protected $availableIncludes = ['category', 'user', 'comments'];
 
     public function transform(Good $good)
     {
@@ -54,5 +55,13 @@ class GoodTransformer extends TransformerAbstract
     public function includeUser(User $user)
     {
         return $this->item($user->user, new UserTransformer());
+    }
+
+    /**
+     * 商品额外的评价数据
+     */
+    public function includeComments(Good $good)
+    {
+        return $this->collection($good->comments, new CommentTransformer());
     }
 }
