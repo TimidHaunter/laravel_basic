@@ -6,15 +6,17 @@ use App\Models\Goods;
 use App\Models\User;
 use League\Fractal\TransformerAbstract;
 
-class GoodTransformer extends TransformerAbstract
+class GoodsTransformer extends TransformerAbstract
 {
     protected $availableIncludes = ['category', 'user', 'comments'];
 
     public function transform(Goods $goods)
     {
         $pics_url = [];
-        foreach ($goods->pics as $p) {
-            array_push($pics_url, oss_url($p));
+        if (is_array($goods->pics)) {
+            foreach ($goods->pics as $p) {
+                array_push($pics_url, oss_url($p));
+            }
         }
 
         // 自定义响应格式

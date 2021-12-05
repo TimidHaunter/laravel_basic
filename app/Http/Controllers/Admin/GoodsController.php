@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Admin\GoodsRequest;
 use App\Models\Category;
-use App\Models\Good;
-use App\Transformers\GoodTransformer;
+use App\Models\Goods;
+use App\Transformers\GoodsTransformer;
 use Illuminate\Http\Request;
 
 class GoodsController extends BaseController
@@ -24,7 +24,7 @@ class GoodsController extends BaseController
         $is_on = $request->query('is_on', false);
         $is_recommend = $request->query('is_recommend', false);
 
-        $goods = Good::when($title, function ($query) use ($title){
+        $goods = Goods::when($title, function ($query) use ($title){
                 $query->where('title', 'like', "%$title%");
             })
             ->when($category_id, function ($query) use ($category_id){
@@ -38,7 +38,7 @@ class GoodsController extends BaseController
                 $query->where('is_recommend', $is_recommend);
             })
             ->paginate(2);
-        return $this->response->paginator($goods, new GoodTransformer);
+        return $this->response->paginator($goods, new GoodsTransformer);
     }
 
     /**
@@ -62,7 +62,7 @@ class GoodsController extends BaseController
 
         $request->offsetSet('user_id', $user_id);
         // 表单验证
-        Good::create($request->all());
+        Goods::create($request->all());
         return $this->response->created();
     }
 
@@ -70,16 +70,16 @@ class GoodsController extends BaseController
      * GET
      * 商品详情
      */
-    public function show(Good $good)
+    public function show(Goods $goods)
     {
-        return $this->response->item($good, new GoodTransformer());
+        return $this->response->item($goods, new GoodsTransformer());
     }
 
     /**
      * PUT
      * 商品编辑
      */
-    public function update(Request $request, Good $good)
+    public function update(Request $request, Goods $goods)
     {
         $category = Category::find($request->category_id);
 
@@ -87,7 +87,7 @@ class GoodsController extends BaseController
         if ($category->status==0) return $this->response->errorBadRequest('分类被禁用');
         if ($category->level != 3) return $this->response->errorBadRequest('只能向三级分类添加商品');
 
-        $good->update($request->all());
+        $goods->update($request->all());
         return $this->response->noContent();
     }
 
@@ -95,10 +95,10 @@ class GoodsController extends BaseController
      * PATCH
      * 商品上架
      */
-    public function isOn(Good $good)
+    public function isOn(Goods $goods)
     {
-        $good->is_on = $good->is_on == 0 ? 1 : 0;
-        $good->save();
+        $goods->is_on = $goods->is_on == 0 ? 1 : 0;
+        $goods->save();
 
         return $this->response->noContent();
     }
@@ -106,10 +106,10 @@ class GoodsController extends BaseController
     /**
      * 商品推荐
      */
-    public function isRecommend(Good $good)
+    public function isRecommend(Goods $goods)
     {
-        $good->is_recommend = $good->is_recommend == 0 ? 1 : 0;
-        $good->save();
+        $goods->is_recommend = $goods->is_recommend == 0 ? 1 : 0;
+        $goods->save();
 
         return $this->response->noContent();
     }

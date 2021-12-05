@@ -49,6 +49,6 @@ class CommentTransformer extends TransformerAbstract
      */
     public function includeGoods(Comment $comment)
     {
-        return $this->item($comment->goods, new GoodTransformer());
+        return $this->item($comment->goods, new GoodsTransformer());
     }
 }

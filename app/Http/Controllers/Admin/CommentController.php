@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
 use App\Models\Comment;
-use App\Models\Good;
+use App\Models\Goods;
 use App\Transformers\CommentTransformer;
 use Illuminate\Http\Request;
 
@@ -26,7 +26,7 @@ class CommentController extends BaseController
         })
         ->when($goods_title, function ($query) use ($goods_title) {
             // 先查询相关商品的ID，连表查询
-            $goods_ids = Good::where('title', 'like', "%{$goods_title}%")->pluck('id');
+            $goods_ids = Goods::where('title', 'like', "%{$goods_title}%")->pluck('id');
             $query->whereIn('goods_id', $goods_ids);
         })
         ->paginate(1);
