@@ -1,12 +1,8 @@
 <?php
 
-
 namespace App\Transformers;
 
-
-use App\Models\Category;
-use App\Models\Comment;
-use App\Models\Good;
+use App\Models\Goods;
 use App\Models\User;
 use League\Fractal\TransformerAbstract;
 
@@ -14,39 +10,39 @@ class GoodTransformer extends TransformerAbstract
 {
     protected $availableIncludes = ['category', 'user', 'comments'];
 
-    public function transform(Good $good)
+    public function transform(Goods $goods)
     {
         $pics_url = [];
-        foreach ($good->pics as $p) {
+        foreach ($goods->pics as $p) {
             array_push($pics_url, oss_url($p));
         }
 
         // 自定义响应格式
         return [
-            'category_id' => $good->category_id,
+            'category_id' => $goods->category_id,
 //            'category_name' => Category::find($good->category_id)->name,
-            'title' => $good->title,
-            'description' => $good->description,
-            'price' => $good->price,
-            'stock' => $good->stock,
-            'cover' => $good->cover,
-            'cover_url' => oss_url($good->cover), // 域名拼接
-            'pics' => $good->pics,
+            'title' => $goods->title,
+            'description' => $goods->description,
+            'price' => $goods->price,
+            'stock' => $goods->stock,
+            'cover' => $goods->cover,
+            'cover_url' => oss_url($goods->cover), // 域名拼接
+            'pics' => $goods->pics,
             'pics_url' => $pics_url,
-            'is_on' => $good->is_on,
-            'is_recommend' => $good->is_recommend,
-            'details' => $good->details,
-            'created_at' => $good->created_at,
-            'updated_at' => $good->updated_at,
+            'is_on' => $goods->is_on,
+            'is_recommend' => $goods->is_recommend,
+            'details' => $goods->details,
+            'created_at' => $goods->created_at,
+            'updated_at' => $goods->updated_at,
         ];
     }
 
     /**
      * 额外的分类数据
      */
-    public function includeCategory(Good $good)
+    public function includeCategory(Goods $goods)
     {
-        return $this->item($good->category, new CategoryTransformer());
+        return $this->item($goods->category, new CategoryTransformer());
     }
 
     /**
@@ -60,8 +56,8 @@ class GoodTransformer extends TransformerAbstract
     /**
      * 商品额外的评价数据
      */
-    public function includeComments(Good $good)
+    public function includeComments(Goods $goods)
     {
-        return $this->collection($good->comments, new CommentTransformer());
+        return $this->collection($goods->comments, new CommentTransformer());
     }
 }
