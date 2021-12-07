@@ -70,9 +70,9 @@ class GoodsController extends BaseController
      * GET
      * 商品详情
      */
-    public function show(Goods $goods)
+    public function show(Goods $good)
     {
-        return $this->response->item($goods, new GoodsTransformer());
+        return $this->response->item($good, new GoodsTransformer());
     }
 
     /**
