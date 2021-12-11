@@ -75,6 +75,19 @@ $api->version('v1', $params, function ($api) {
             $api->get('comments/{comment}', [\App\Http\Controllers\Admin\CommentController::class, 'show']);
             // 评价回复，更新使用patch
             $api->patch('comments/{comment}/reply', [\App\Http\Controllers\Admin\CommentController::class, 'reply']);
+
+
+            /**
+             * 订单管理
+             */
+            // 订单列表
+            $api->get('orders', [\App\Http\Controllers\Admin\OrderController::class, 'index']);
+            // 订单详情
+            $api->get('orders/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'show']);
+            // 订单发货
+            $api->patch('orders/{order}/post', [\App\Http\Controllers\Admin\OrderController::class, 'post']);
+
+
         });
     });
 });
