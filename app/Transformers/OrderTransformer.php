@@ -7,6 +7,8 @@ use League\Fractal\TransformerAbstract;
 
 class OrderTransformer extends TransformerAbstract
 {
+    protected $availableIncludes = ['user', 'orderDetails'];
+
     public function transform(Order $order)
     {
         // 自定义响应格式
@@ -23,4 +25,22 @@ class OrderTransformer extends TransformerAbstract
             'trade_no'     => $order->trade_no,
         ];
     }
+
+    /**
+     * 关联数据，用户
+     */
+    public function includeUser(Order $order)
+    {
+        return $this->item($order->user, new UserTransformer());
+    }
+
+    /**
+     * 订单详情
+     */
+    public function includeOrderDetails(Order $order)
+    {
+        return $this->collection($order->orderDetails, new orderDetailsTransformer());
+    }
+
+
 }

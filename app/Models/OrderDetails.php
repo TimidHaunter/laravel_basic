@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class OrderDetails extends Model
 {
     use HasFactory;
+
+    /**
+     * 所关联的商品
+     */
+    public function goods()
+    {
+        return $this->hasOne(Goods::class, 'id', 'goods_id');
+    }
 }
