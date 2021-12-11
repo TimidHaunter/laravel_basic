@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\BaseController;
 use App\Models\Order;
 use App\Transformers\OrderTransformer;
+use Config;
 use Illuminate\Http\Request;
 
 class OrderController extends BaseController
@@ -64,7 +65,7 @@ class OrderController extends BaseController
 
         $order->express_type = $request->input('express_type');
         $order->express_no   = $request->input('express_no');
-        $order->status = 3; // 发货状态，建议设置成常量
+        $order->status = Config::get('constants.Shipped');; // 发货状态，建议设置成常量
         $order->save();
         return $this->response->noContent();
     }
