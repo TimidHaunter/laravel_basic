@@ -244,3 +244,23 @@ public function boot()
 [Web直传](https://help.aliyun.com/document_detail/31927.html?spm=a2c4g.11186623.2.10.5602668eApjlz3#concept-qp2-g4y-5db)
 
 后端接口提供AccessKey一系列参数，并且返回签名，前端用js上传至阿里云OSS
+
+## Mail
+> php artisan make:mail OrderPost
+
+`app/Mail/OrderPost.php`
+
+### 邮箱配置
+```
+# 邮箱配置
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.163.com
+MAIL_PORT=465
+MAIL_USERNAME=yintx_129@163.com
+# 邮箱第三方授权码
+MAIL_PASSWORD=USKZSWBHWWTMWVEZ
+MAIL_ENCRYPTION=ssl
+MAIL_FROM_ADDRESS=yintx_129@163.com
+# 邮件发送者名称
+MAIL_FROM_NAME="天雄超市"
+```

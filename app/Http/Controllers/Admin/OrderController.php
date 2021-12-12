@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
+use App\Mail\OrderPost;
 use App\Models\Order;
 use App\Transformers\OrderTransformer;
 use Config;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends BaseController
 {
@@ -67,6 +69,10 @@ class OrderController extends BaseController
         $order->express_no   = $request->input('express_no');
         $order->status = Config::get('constants.Shipped');; // 发货状态，建议设置成常量
         $order->save();
+
+        // 使用邮箱发送
+        Mail::to($order->user)->send(new OrderPost($order));
+
         return $this->response->noContent();
     }
 }
