@@ -33,7 +33,7 @@ return [
         'sync' => [
             'driver' => 'sync',
         ],
-
+        # 数据库
         'database' => [
             'driver' => 'database',
             'table' => 'jobs',
@@ -61,7 +61,7 @@ return [
             'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
             'after_commit' => false,
         ],
-
+        # redis
         'redis' => [
             'driver' => 'redis',
             'connection' => 'default',

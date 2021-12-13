@@ -264,3 +264,26 @@ MAIL_FROM_ADDRESS=yintx_129@163.com
 # 邮件发送者名称
 MAIL_FROM_NAME="天雄超市"
 ```
+
+## 队列
+[队列文档](https://learnku.com/docs/laravel/8.x/queues/9398#connections-vs-queues)
+
+使用数据库队列
+> php artisan queue:table
+> php artisan migrate
+
+生成一个队列表 jobs，和自带一个 failed_jobs 失败队列表
+
+队列默认配置文件
+`config/queue.php`
+
+在 `.env` 文件中可以修改队列驱动，数据库和 Redis
+```
+# 队列驱动 database 数据库
+QUEUE_CONNECTION=database
+```
+
+创建队列
+运行队列
+> php artisan queue:work
+

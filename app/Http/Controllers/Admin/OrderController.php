@@ -71,7 +71,13 @@ class OrderController extends BaseController
         $order->save();
 
         // 使用邮箱发送
-        Mail::to($order->user)->send(new OrderPost($order));
+        // 发送邮件耗时，比如发短信，发邮件可以放入队列当中
+        // send 换 queue，使用默认队列
+        // 配置队列
+        Mail::to($order->user)->queue(new OrderPost($order));
+
+        // 关闭队列
+//        Mail::to($order->user)->send(new OrderPost($order));
 
         return $this->response->noContent();
     }
