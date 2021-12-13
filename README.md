@@ -287,3 +287,75 @@ QUEUE_CONNECTION=database
 运行队列
 > php artisan queue:work
 
+## 队列的守护进程
+[Docker内部使用Supervisor](https://www.voidking.com/dev-docker-supervisor/)
+查看队列守护进程的状态
+> sudo supervisorctl status
+```shell
+/usr/local/software # supervisorctl status
+unix:///run/supervisord.sock no such file
+```
+报错是因为没有开始守护进程
+
+## docker
+查看Linux发行版本
+```shell
+/usr/local/software # cat /etc/issue
+Welcome to Alpine Linux 3.12
+Kernel \r on an \m (\l)
+```
+Alpine | apk 包管理工具
+CentOS | yum
+Ubuntu | apt
+
+Alpine 安装 Supervisor
+> apk add --no-cache supervisor
+
+安装 vim
+> apk add --update vim
+
+配置守护进程文件
+/etc/supervisor.conf
+```
+[include]
+files = /etc/supervisor.d/*.ini
+```
+
+```
+[program:laravel-worker] 进程名字
+process_name=%(program_name)s_%(process_num)02d
+command=php /www/laravel_basic/artisan queue:work 命令所在位置
+autostart=true
+autorestart=true
+user=root
+numprocs=2 进程数
+redirect_stderr=true
+stdout_logfile=/www/laravel_basic/storage/logs/worker.log 日志目录
+stopwaitsecs=3600
+
+[supervisord]
+nodaemon=true 设置supervisor为前台进程
+
+[supervisorctl]
+
+
+
+[program:yintian-shop]
+process_name=%(program_name)s_%(process_num)02d
+command=php /www/laravel_basic/artisan queue:work
+autostart=true
+autorestart=true
+user=root
+numprocs=2
+redirect_stderr=true
+stdout_logfile=/www/laravel_basic/storage/logs/worker.log
+stopwaitsecs=3600
+
+[supervisord]
+nodaemon=true
+
+[supervisorctl]
+```
+
+开启守护进程
+> supervisord -c /etc/supervisord.conf
