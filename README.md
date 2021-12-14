@@ -1,4 +1,4 @@
-## 开始前的准备
+# 开始前的准备
 [Laravel文档](https://learnku.com/docs/laravel/8.x)
 - 开发环境布置
 [dnmp](https://www.awaimai.com/2120.html#42)
@@ -15,22 +15,22 @@
 
 - 目录结构
 
-## composer.json
+# composer.json
 > composer install
 安装composer文件，自动下载
 
-## Dingo api
+# Dingo api
 > 如果开发纯api的项目，可以安装dingo api
 ```shell
 composer require dingo/api
 ```
-## 基于Laravel使用ding/api+jwt开发api接口
+# 基于Laravel使用ding/api+jwt开发api接口
 
-## MySQL
+# MySQL
 > mysql -u root -p 123456
 字符集 `utf8` 排序规则 `utf8_general_ci`
 
-## docker
+# docker
 > 使用docker搭建lnmp环境，使用的是分容器的搭建方案
 框架使用thinkphp，想要连接数据MySQL，一直显示“SQLSTATE[HY000] [2002] Connection refused”
 数据库配置host填的是localhost，后面改成了127.0.0.1，都是连接不了
@@ -38,66 +38,66 @@ composer require dingo/api
 想了好久，原来都是分容器的问题，由于采用了分容器的搭建方案，在php的容器内连接127.0.0.1或者localhost，肯定是连接不了数据库MySQL的
 应该把数据库配置host填成MySQL容器名称，我本地的MySQL容器名称为mysql，改成这样就可以连接
 
-## jwt
+# jwt
 [文档1](https://learnku.com/docs/dingo-api/2.0.0/Authentication/1449)
 [文档2](https://learnku.com/laravel/wikis/25704)
 
-## 访问节流限制
+# 访问节流限制
 > nginx 也可以做，针对客户端 ip 访问 Nginx 服务器 HttpLimitReqModul
 > 限制访问 api 的次数
 
-## api v1 v2 版本
+# api v1 v2 版本
 > 有问题，没解决 todo
 
-## api文档
+# api文档
 `showDoc`
 
-### api 接口文档模板
+## api 接口文档模板
 
-##### 接口描述
+### 接口描述
 
 - 接口模板
 
-##### 请求URL
+### 请求URL
 
 - ` /api/auth/{type} `
 
-##### 请求方式
+### 请求方式
 
 - POST 
 
-##### 请求头部
+### 请求头部
 
 |参数名|必选|类型|说明|
 |:----    |:---|:----- |-----   |
 |Authorization |是  |string |JWT token   |
 
-##### REST 参数
+### REST 参数
 
 |参数名|必选|类型|说明|
 |:----    |:---|:----- |-----   |
 |type |是  |string |类型|
 
-#### Query 请求参数 get?参数
+## Query 请求参数 get?参数
 
 |参数名|必选|类型|说明|
 |:----    |:---|:----- |-----   |
 |keyword |是  |string |关键字|
 
-#### Body 请求参数 post表单参数
+## Body 请求参数 post表单参数
 
 |参数名|必选|类型|说明|
 |:----    |:---|:----- |-----   |
 |keyword |是  |string |关键字|
 
-#### 返回参数
+## 返回参数
 
 |参数名|必选|类型|说明|
 |:----    |:---|:----- |-----   |
 |name |是  |string |昵称|
 |email |是  |string |邮箱|
 
-#### 返回示例
+## 返回示例
 
 - 状态码 200 请求成功
 
@@ -130,22 +130,17 @@ composer require dingo/api
 }
 ```
 
+## 数据字典模板
 
-
-
-
-
-### 数据字典模板
-
-#### 表名
+## 表名
 
 -  users
 
-#### 描述
+## 描述
 
 -  用户表，储存用户信息
 
-#### 字段
+## 字段
 
 |字段|类型|空|默认|注释|
 |:----    |:-------    |:--- |---|------      |
@@ -155,31 +150,31 @@ composer require dingo/api
 |name     |varchar(15) |是   |    |    昵称     |
 |reg_time |int(11)     |否   | 0  |   注册时间  |
 
-#### 备注
+## 备注
 
 - 无
 
-## 命令行
+# 命令行
 > php artisan api:docs --name Example --use-version v2 --output-file /path/to/documentation.md
 > php artisan api:routes
 
-## 表单验证
+# 表单验证
 [表单验证](https://learnku.com/docs/laravel/8.5/validation/10378)
 > php artisan make:request Auth/RegisterRequest
 
-## 语言包
+# 语言包
 `resources\lang`
 > composer require laravel-lang/lang:~8.0
 
-## 登录
+# 登录
 命令行创建的控制器是继承自父类，没办法自动继承我们自己写的基类
 > php artisan make:controller Auth/LoginController
 
-## 包
+# 包
 > composer require liyu/dingo-serializer-switch
 dingo 返回数据，减少 transformer 包裹层
 
-## 自动加载
+# 自动加载
 > helper.php
 
 ```json
@@ -189,7 +184,7 @@ dingo 返回数据，减少 transformer 包裹层
 ```
 composer dump-autoload
 
-## 缓存
+# 缓存
 默认是文件缓存
 `config/cache.php`
 ```php
@@ -197,10 +192,10 @@ composer dump-autoload
 'default' => env('CACHE_DRIVER', 'file'),
 ```
 
-## postman
+# postman
 > post 默认参数使用 Boby x-www-form-urlencoded
 
-## 观察者
+# 观察者
 (事件，观察者)[https://www.cnblogs.com/mouseleo/p/8668001.html]
 > php artisan make:observer CategoryObser --model=Category
 在服务容器里注册
@@ -214,11 +209,11 @@ public function boot()
 }
 ```
 
-## 模型
+# 模型
 > php artisan make:model Good -m // 创建模型的同时创建迁移文件
 > php artisan make:model Good -mc // 还要创建控制器，但是没有办法指定路径
 
-## 模型关联
+# 模型关联
 > app/Models/Good.php
 ```php
 <?php
@@ -228,7 +223,7 @@ public function boot()
     }
 ```
 
-## transformer
+# transformer
 在 Transformer 里关联外部数据，比如Good商品只有category_id和user_id，如果需要分类名和用户名需要关联查表。在 Transformer 里可以轻易通过
 ```php
 <?php
@@ -238,19 +233,19 @@ public function boot()
     }
 ```
 
-## Laravel接入阿里OSS
+# Laravel接入阿里OSS
 > composer require "iidestiny/laravel-filesystem-oss"
 
 [Web直传](https://help.aliyun.com/document_detail/31927.html?spm=a2c4g.11186623.2.10.5602668eApjlz3#concept-qp2-g4y-5db)
 
 后端接口提供AccessKey一系列参数，并且返回签名，前端用js上传至阿里云OSS
 
-## Mail
+# Mail
 > php artisan make:mail OrderPost
 
 `app/Mail/OrderPost.php`
 
-### 邮箱配置
+# 邮箱配置
 ```
 # 邮箱配置
 MAIL_MAILER=smtp
@@ -265,7 +260,7 @@ MAIL_FROM_ADDRESS=yintx_129@163.com
 MAIL_FROM_NAME="天雄超市"
 ```
 
-## 队列
+# 队列
 [队列文档](https://learnku.com/docs/laravel/8.x/queues/9398#connections-vs-queues)
 
 使用数据库队列
@@ -287,7 +282,7 @@ QUEUE_CONNECTION=database
 运行队列
 > php artisan queue:work
 
-## 队列的守护进程
+# 队列的守护进程
 [Docker内部使用Supervisor](https://www.voidking.com/dev-docker-supervisor/)
 查看队列守护进程的状态
 > sudo supervisorctl status
@@ -297,7 +292,7 @@ unix:///run/supervisord.sock no such file
 ```
 报错是因为没有开始守护进程
 
-## docker
+# docker
 查看Linux发行版本
 ```shell
 /usr/local/software # cat /etc/issue
@@ -359,3 +354,36 @@ nodaemon=true
 
 开启守护进程
 > supervisord -c /etc/supervisord.conf
+
+
+# 事件
+把发邮件逻辑放入事件中
+[事件文档](https://learnku.com/docs/laravel/8.x/events/9391)
+
+> MySQL 事务
+
+事件和监听器
+先在 `app/Providers/EventServiceProvider.php` 中添加监听
+```php
+<?php
+/**
+ * The event listener mappings for the application.
+ * 应用程序的事件监听器映射
+ *
+ * @var array
+ */
+protected $listen = [
+    Registered::class => [
+        SendEmailVerificationNotification::class,
+    ],
+    'App\Events\OrderPost' => [
+        'App\Listeners\SendEmailToOrderUser',
+    ],
+];
+```
+再执行命令
+> php artisan event:generate
+> Events and listeners generated successfully!
+
+生成事件 `app/Events/OrderPost.php` 和监听者 `app/Listeners/SendEmailToOrderUser.php` 两个文件
+监听者监听事件

@@ -11,12 +11,18 @@ class EventServiceProvider extends ServiceProvider
 {
     /**
      * The event listener mappings for the application.
+     * 应用程序的事件监听器映射
      *
      * @var array
      */
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        // OrderPost 事件名字
+        // SendEmailToOrderUser 监听者
+        'App\Events\OrderPost' => [
+            'App\Listeners\SendEmailToOrderUser',
         ],
     ];
 

@@ -65,19 +65,38 @@ class OrderController extends BaseController
             'express_no.required'   => '快递单号必填',
         ]);
 
-        $order->express_type = $request->input('express_type');
-        $order->express_no   = $request->input('express_no');
-        $order->status = Config::get('constants.Shipped');; // 发货状态，建议设置成常量
-        $order->save();
-
-        // 使用邮箱发送
-        // 发送邮件耗时，比如发短信，发邮件可以放入队列当中
-        // send 换 queue，使用默认队列
-        // 配置队列
-        Mail::to($order->user)->queue(new OrderPost($order));
+        // 正常发货逻辑
+//        $order->express_type = $request->input('express_type');
+//        $order->express_no   = $request->input('express_no');
+//        $order->status = Config::get('constants.Shipped');; // 发货状态，建议设置成常量
+//        $order->save();
+//
+//        // 使用邮箱发送
+//        // 发送邮件耗时，比如发短信，发邮件可以放入队列当中
+//        // send 换 queue，使用默认队列
+//        // 配置队列
+//        Mail::to($order->user)->queue(new OrderPost($order));
 
         // 关闭队列
 //        Mail::to($order->user)->send(new OrderPost($order));
+
+
+
+
+        // 事件辅助函数分发邮件
+//        event(new \App\Events\OrderPost(
+//            $order,
+//            $request->input('express_type'),
+//            $request->input('express_no')
+//        ));
+
+        // 使用事件分发
+        \App\Events\OrderPost::dispatch(
+            $order,
+            $request->input('express_type'),
+            $request->input('express_no')
+        );
+
 
         return $this->response->noContent();
     }
