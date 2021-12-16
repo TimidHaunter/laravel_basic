@@ -91,6 +91,8 @@ $api->version('v1', $params, function ($api) {
             /**
              * 轮播图管理
              */
+            // 轮播图管理seq更新
+            $api->patch('slides/{slide}/seq', [\App\Http\Controllers\Admin\SlideController::class, 'seq']);
             // 轮播图管理资源路由
             $api->resource('slides', \App\Http\Controllers\Admin\SlideController::class);
         });

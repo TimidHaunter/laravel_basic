@@ -6,6 +6,7 @@ use App\Http\Controllers\BaseController;
 use App\Http\Requests\Admin\SlideRequest;
 use App\Models\Slide;
 use App\Transformers\SlideTransformer;
+use Illuminate\Http\Request;
 
 class SlideController extends BaseController
 {
@@ -39,26 +40,39 @@ class SlideController extends BaseController
      * GET
      * 详情
      */
-    public function show($id)
+    public function show(Slide $slide)
     {
-        //
+        return $this->response->item($slide, new SlideTransformer());
     }
 
     /**
      * PATCH
      * 更新
      */
-    public function update(SlideRequest $slideRequest, $id)
+    public function update(SlideRequest $slideRequest, Slide $slide)
     {
-        //
+        // 批量赋值
+        $slide->update($slideRequest->all());
+        return $this->response->noContent();
     }
 
     /**
      * DELETE
      * 删除
      */
-    public function destroy($id)
+    public function destroy(Slide $slide)
     {
-        //
+        $slide->delete();
+        return $this->response->noContent();
+    }
+
+    /**
+     * 更新 seq 字段
+     */
+    public function seq(Request $request, Slide $slide)
+    {
+        $slide->seq = $request->input('seq', 1);
+        $slide->save();
+        return $this->response->noContent();
     }
 }
