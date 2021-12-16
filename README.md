@@ -387,3 +387,5 @@ protected $listen = [
 
 生成事件 `app/Events/OrderPost.php` 和监听者 `app/Listeners/SendEmailToOrderUser.php` 两个文件
 监听者监听事件
+
+

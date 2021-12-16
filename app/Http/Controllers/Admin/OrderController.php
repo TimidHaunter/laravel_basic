@@ -81,8 +81,9 @@ class OrderController extends BaseController
 //        Mail::to($order->user)->send(new OrderPost($order));
 
 
-
-
+        /**
+         * 监听事件
+         */
         // 事件辅助函数分发邮件
 //        event(new \App\Events\OrderPost(
 //            $order,
@@ -90,7 +91,7 @@ class OrderController extends BaseController
 //            $request->input('express_no')
 //        ));
 
-        // 使用事件分发
+        // 使用事件分发，触发监听
         \App\Events\OrderPost::dispatch(
             $order,
             $request->input('express_type'),
