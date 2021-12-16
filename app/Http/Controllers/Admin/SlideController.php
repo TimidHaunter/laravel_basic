@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Admin\SlideRequest;
 use App\Models\Slide;
+use App\Transformers\SlideTransformer;
 
 class SlideController extends BaseController
 {
@@ -13,7 +14,8 @@ class SlideController extends BaseController
      */
     public function index()
     {
-        //
+        $slides = Slide::paginate(10);
+        return $this->response->paginator($slides, new SlideTransformer());
     }
 
     /**
