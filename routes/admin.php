@@ -88,6 +88,11 @@ $api->version('v1', $params, function ($api) {
             $api->patch('orders/{order}/post', [\App\Http\Controllers\Admin\OrderController::class, 'post']);
 
 
+            /**
+             * 轮播图管理
+             */
+            // 轮播图管理资源路由
+            $api->resource('slides', \App\Http\Controllers\Admin\SlideController::class);
         });
     });
 });
