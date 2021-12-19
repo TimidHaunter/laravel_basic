@@ -4,13 +4,14 @@ use App\Models\Category;
 
 if (!function_exists('categoryTree')) {
     // todo 优化层级level，拿几层
-    function categoryTree($status = false) {
+    function categoryTree($group = 'goods', $status = false) {
         $categories = Category::select([
             'id','pid','name','level','status'
         ])
             ->when($status !== false, function($query) use ($status) {
                 $query->where('status', $status);
             })
+            ->where('group', $group)
             ->where('pid', 0)
             ->with([
                 'children' => function ($query) use ($status){
@@ -44,7 +45,7 @@ if(!function_exists('cache_categoryTree_enable')) {
     function cache_categoryTree_enable(){
         // 没有key的时候调用回调函数
         return cache()->rememberForever('cache_categoryTree_enable', function(){
-            return categoryTree(1);
+            return categoryTree('goods', 1);
         });
     }
 }
@@ -56,6 +57,29 @@ if(!function_exists('cache_categoryTree_all')) {
     function cache_categoryTree_all(){
         return cache()->rememberForever('cache_categoryTree_all', function(){
             return categoryTree();
+        });
+    }
+}
+
+/**
+ * 缓存没有被禁用的菜单
+ */
+if(!function_exists('cache_categoryTree_menu_enable')) {
+    function cache_categoryTree_menu_enable(){
+        // 没有key的时候调用回调函数
+        return cache()->rememberForever('cache_categoryTree_menu_enable', function(){
+            return categoryTree('menu', 1);
+        });
+    }
+}
+
+/**
+ * 缓存所有的菜单
+ */
+if(!function_exists('cache_categoryTree_menu_all')) {
+    function cache_categoryTree_menu_all(){
+        return cache()->rememberForever('cache_categoryTree_menu_all', function(){
+            return categoryTree('menu');
         });
     }
 }

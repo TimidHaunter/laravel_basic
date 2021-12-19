@@ -95,6 +95,17 @@ $api->version('v1', $params, function ($api) {
             $api->patch('slides/{slide}/seq', [\App\Http\Controllers\Admin\SlideController::class, 'seq']);
             // 轮播图管理资源路由
             $api->resource('slides', \App\Http\Controllers\Admin\SlideController::class);
+
+            /**
+             * 菜单管理
+             */
+            $api->get('menus', [\App\Http\Controllers\Admin\MenuController::class, 'index']);
+
+
+
+
+
+
         });
     });
 });
