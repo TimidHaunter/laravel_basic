@@ -12,9 +12,10 @@ class MenuController extends BaseController
         $type = $request->input('type', 'all');
 
         if ($type == 'all') {
-            return cache_categoryTree_menu_all();
+            return cacheCategoryTreeMenuAll();
         } else {
-            return cache_categoryTree_menu_enable();
+            return cacheCategoryTreeMenuEnable();
         }
     }
+
 }

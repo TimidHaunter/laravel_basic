@@ -19,9 +19,9 @@ class CategoryController extends BaseController
 //        dd($request);
 
         if ($type == 'all') {
-            return cache_categoryTree_all();
+            return cacheCategoryTreeAll();
         } else {
-            return cache_categoryTree_enable();
+            return cacheCategoryTreeEnable();
         }
     }
 
@@ -72,6 +72,11 @@ class CategoryController extends BaseController
         return $this->response->noContent();
     }
 
+    /**
+     * 校验需要添加的数据
+     * @param $request
+     * @return array|void
+     */
     protected function checkInput($request)
     {
         // 验证参数
@@ -80,6 +85,9 @@ class CategoryController extends BaseController
         ], [
             'name.required' => '分类名称不能为空'
         ]);
+
+        // 获取分组
+        $group = $request->input('group', 'goods');
 
         // 获取pid
         $pid = $request->input('pid', 0);
@@ -94,6 +102,7 @@ class CategoryController extends BaseController
 
         return [
             'name' => $request->input('name'),
+            'group' => $group,
             'pid' => $pid,
             'level' => $level
         ];

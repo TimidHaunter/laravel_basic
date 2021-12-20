@@ -10,7 +10,7 @@ class Category extends Model
     use HasFactory;
 
     // 可批量赋值的字段
-    protected $fillable = ['name', 'pid', 'level'];
+    protected $fillable = ['name', 'group', 'pid', 'level'];
 
     /**
      * 分类的子类

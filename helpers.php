@@ -41,10 +41,10 @@ if (!function_exists('categoryTree')) {
 /**
  * 缓存没有被禁用的分类
  */
-if(!function_exists('cache_categoryTree_enable')) {
-    function cache_categoryTree_enable(){
+if(!function_exists('cacheCategoryTreeEnable')) {
+    function cacheCategoryTreeEnable(){
         // 没有key的时候调用回调函数
-        return cache()->rememberForever('cache_categoryTree_enable', function(){
+        return cache()->rememberForever('cacheCategoryTreeEnable', function(){
             return categoryTree('goods', 1);
         });
     }
@@ -53,21 +53,31 @@ if(!function_exists('cache_categoryTree_enable')) {
 /**
  * 缓存所有的分类
  */
-if(!function_exists('cache_categoryTree_all')) {
-    function cache_categoryTree_all(){
-        return cache()->rememberForever('cache_categoryTree_all', function(){
+if(!function_exists('cacheCategoryTreeAll')) {
+    function cacheCategoryTreeAll(){
+        return cache()->rememberForever('cacheCategoryTreeAll', function(){
             return categoryTree();
         });
     }
 }
 
 /**
+ * 刷新分类缓存
+ */
+if(!function_exists('forgetCacheCategory')){
+    function forgetCacheCategory(){
+        cache()->forget('cacheCategoryTreeEnable');
+        cache()->forget('cacheCategoryTreeAll');
+    }
+}
+
+/**
  * 缓存没有被禁用的菜单
  */
-if(!function_exists('cache_categoryTree_menu_enable')) {
-    function cache_categoryTree_menu_enable(){
+if(!function_exists('cacheCategoryTreeMenuEnable')) {
+    function cacheCategoryTreeMenuEnable(){
         // 没有key的时候调用回调函数
-        return cache()->rememberForever('cache_categoryTree_menu_enable', function(){
+        return cache()->rememberForever('cacheCategoryTreeMenuEnable', function(){
             return categoryTree('menu', 1);
         });
     }
@@ -76,21 +86,21 @@ if(!function_exists('cache_categoryTree_menu_enable')) {
 /**
  * 缓存所有的菜单
  */
-if(!function_exists('cache_categoryTree_menu_all')) {
-    function cache_categoryTree_menu_all(){
-        return cache()->rememberForever('cache_categoryTree_menu_all', function(){
+if(!function_exists('cacheCategoryTreeMenuAll')) {
+    function cacheCategoryTreeMenuAll(){
+        return cache()->rememberForever('cacheCategoryTreeMenuAll', function(){
             return categoryTree('menu');
         });
     }
 }
 
 /**
- * 刷新分类缓存
+ * 刷新菜单缓存
  */
-if(!function_exists('forget_cache_category')){
-    function forget_cache_category(){
-        cache()->forget('cache_categoryTree_enable');
-        cache()->forget('cache_categoryTree_all');
+if(!function_exists('forgetCacheCategoryMenu')){
+    function forgetCacheCategoryMenu(){
+        cache()->forget('cacheCategoryTreeMenuEnable');
+        cache()->forget('cacheCategoryTreeMenuAll');
     }
 }
 

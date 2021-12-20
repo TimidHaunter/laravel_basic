@@ -11,7 +11,8 @@ class CategoryObserver
      */
     public function created(Category $category)
     {
-        forget_cache_category();
+        forgetCacheCategory();
+        forgetCacheCategoryMenu();
     }
 
     /**
@@ -22,7 +23,8 @@ class CategoryObserver
      */
     public function updated(Category $category)
     {
-        forget_cache_category();
+        forgetCacheCategory();
+        forgetCacheCategoryMenu();
     }
 
     /**
