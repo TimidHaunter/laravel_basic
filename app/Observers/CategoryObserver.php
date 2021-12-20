@@ -7,7 +7,8 @@ use App\Models\Category;
 class CategoryObserver
 {
     /**
-     * 添加事件
+     * 模型添加时触发
+     * todo Subject 是不是 Category （模型）呢？
      */
     public function created(Category $category)
     {

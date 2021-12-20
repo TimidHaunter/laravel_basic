@@ -390,3 +390,10 @@ protected $listen = [
 
 # 增加字段，迁移文件
 > php artisan make:migration add_group_to_category_tables --table=categories
+
+# 数据库，数据迁移文件
+`database\seeders`
+> php artisan make:seeder MenuSeeder
+> php artisan db:seed --class=MenuSeeder
+
+用模型关联插入数据，感觉不好用。不用导出SQL文件。
