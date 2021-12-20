@@ -397,3 +397,18 @@ protected $listen = [
 > php artisan db:seed --class=MenuSeeder
 
 用模型关联插入数据，感觉不好用。不用导出SQL文件。
+
+# 权限限制
+Laravel-permission
+https://learnku.com/articles/9842/user-role-permission-control-package-laravel-permission-usage-description
+
+> composer require spatie/laravel-permission
+
+生成数据库迁移文件
+> php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="migrations"
+> php artisan migrate
+
+permission 控制颗粒度到什么地步
+
+model_has_roles 用户属于那个角色
+model_has_permissions 用户拥有那些权限，权限补充
