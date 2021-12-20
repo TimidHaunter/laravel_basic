@@ -11,6 +11,7 @@ class MenuController extends BaseController
     {
         $type = $request->input('type', 'all');
 
+        // type 默认 all
         if ($type == 'all') {
             return cacheCategoryTreeMenuAll();
         } else {

@@ -8,7 +8,9 @@ if (!function_exists('categoryTree')) {
         $categories = Category::select([
             'id','pid','name','level','status'
         ])
+            // $status 不是 FALSE，默认就不是 FALSE
             ->when($status !== false, function($query) use ($status) {
+//                dd('enable');
                 $query->where('status', $status);
             })
             ->where('group', $group)
@@ -80,6 +82,7 @@ if(!function_exists('cacheCategoryTreeMenuEnable')) {
         return cache()->rememberForever('cacheCategoryTreeMenuEnable', function(){
             return categoryTree('menu', 1);
         });
+//        return categoryTree('menu', 1);
     }
 }
 
@@ -91,6 +94,7 @@ if(!function_exists('cacheCategoryTreeMenuAll')) {
         return cache()->rememberForever('cacheCategoryTreeMenuAll', function(){
             return categoryTree('menu');
         });
+//        return categoryTree('menu');
     }
 }
 
