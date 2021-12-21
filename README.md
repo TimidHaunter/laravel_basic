@@ -457,3 +457,7 @@ config\auth.php
 Kernel.php
 $routeMiddleware
 
+# 重要命令
+刷新所有数据迁移，并数据填充
+> php artisan migrate:refresh --seed
+

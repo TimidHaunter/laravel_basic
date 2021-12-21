@@ -38,7 +38,7 @@ $api->version('v1', $params, function ($api) {
              * 分类管理
              */
             // 分类禁、启用
-            $api->patch('category/{category}/status', [\App\Http\Controllers\Admin\CategoryController::class, 'status']);
+            $api->patch('category/{category}/status', [\App\Http\Controllers\Admin\CategoryController::class, 'status'])->name('category.status');
 
             // 分类管理资源路由，排除掉destroy
             $api->resource('category', \App\Http\Controllers\Admin\CategoryController::class, [

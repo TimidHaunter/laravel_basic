@@ -24,6 +24,12 @@ class PermissionSeeder extends Seeder
             ['name'=>'users.index', 'zh_name'=>'用户列表',    'guard_name'=>'api'],
             ['name'=>'users.show',  'zh_name'=>'用户详情',    'guard_name'=>'api'],
             ['name'=>'users.lock',  'zh_name'=>'用户禁、启用', 'guard_name'=>'api'],
+
+            ['name'=>'category.index',  'zh_name'=>'分类列表', 'guard_name'=>'api'],
+            ['name'=>'category.store',  'zh_name'=>'分类添加', 'guard_name'=>'api'],
+            ['name'=>'category.show',  'zh_name'=>'分类详情', 'guard_name'=>'api'],
+            ['name'=>'category.update',  'zh_name'=>'分类更新', 'guard_name'=>'api'],
+            ['name'=>'category.status',  'zh_name'=>'分类禁、启用', 'guard_name'=>'api'],
         ];
 
 //        Permission::insert($permissions);
@@ -31,11 +37,16 @@ class PermissionSeeder extends Seeder
             Permission::create($p);
         }
 
-        // 添加角色
-        $roles = ['name'=>'super_admin', 'zh_name'=>'超级管理员', 'guard_name'=>'api'];
+        // 添加超级管理员
+        $roles = ['name'=>'root', 'zh_name'=>'超级管理员', 'guard_name'=>'api'];
         $role = Role::create($roles);
 
-        // 为角色添加权限
+        // 为超级管理员添加权限
         $role->givePermissionTo(Permission::all());
+
+        // 分类管理员
+        $roles = ['name'=>'admin_category', 'zh_name'=>'分类管理员', 'guard_name'=>'api'];
+        $role = Role::create($roles);
+        $role->givePermissionTo('category.index', 'category.store', 'category.store', 'category.update', 'category.status');
     }
 }
