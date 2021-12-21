@@ -446,3 +446,14 @@ config\auth.php
 # 数据填充
 一个一个调用seeder太麻烦，可以在`database\seeders\DatabaseSeeder.php`中调用
 > php artisan make:seeder
+
+# 中间件
+创建一个权限的中间件，让路由使用权限的中间件
+[使用中间件](https://learnku.com/articles/9842/user-role-permission-control-package-laravel-permission-usage-description#79863f)
+
+> php artisan make:middleware CheckPermission
+
+注册中间件
+Kernel.php
+$routeMiddleware
+

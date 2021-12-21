@@ -14,12 +14,13 @@ class UserController extends BaseController
      */
     public function index(Request $request)
     {
-        // 搜索，todo get获取不到参数
+        // 搜索
         $name = $request->get('name');
         $email = $request->input('email');
 //        dd($request);
 
-        $pageSize = 2;
+        $pageSize = $request->input('page_size');
+//        dd($pageSize);
         // 闭包用到外部变量 $name，需要使用 use 传参进来
         $users = User::when($name, function($query) use ($name) {
                 $query->where('name', 'like', '%$name%');
