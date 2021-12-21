@@ -23,7 +23,7 @@ $api->version('v1', $params, function ($api) {
              * 单个路由要写在资源路由上面，防止被覆盖
              */
             // 用户禁、启用
-            $api->patch('users/{user}/lock', [\App\Http\Controllers\Admin\UserController::class, 'lock']);
+            $api->patch('users/{user}/lock', [\App\Http\Controllers\Admin\UserController::class, 'lock'])->name('users.lock');
 
             // 用户管理资源路由，只用index和show路由
             $api->resource('users', \App\Http\Controllers\Admin\UserController::class, [

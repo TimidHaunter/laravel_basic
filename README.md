@@ -408,7 +408,37 @@ https://learnku.com/articles/9842/user-role-permission-control-package-laravel-p
 > php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="migrations"
 > php artisan migrate
 
-permission 控制颗粒度到什么地步
+添加几个中文字段标识
+zh_name
 
-model_has_roles 用户属于那个角色
+permission 控制颗粒度到什么地步
+> ['name'=>'users.index', 'zh_name'=>'用户列表'],
+路由.方法
+
+roles 添加角色
+model_has_roles 给用户分配角色
+role_has_permissions 角色拥有什么权限
+permissions 添加权限
 model_has_permissions 用户拥有那些权限，权限补充
+user 添加用户
+
+填充权限，生成数据库迁移文件
+> php artisan make:seeder PermissionSeeder
+
+看守器
+guard_name
+config\auth.php
+```php
+<?php
+    'guards' => [
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+        // api jwt config
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
+        ],
+    ],
+```
