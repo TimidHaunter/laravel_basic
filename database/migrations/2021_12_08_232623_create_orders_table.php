@@ -38,6 +38,9 @@ class CreateOrdersTable extends Migration
             $table->string('pay_type')->nullable()->comment('支付类型 支付宝 微信');
             $table->string('trade_no')->nullable()->comment('支付单号');
             $table->timestamps();
+            $table->index('order_no');
+            $table->index('status');
+            $table->index('trade_no');
         });
     }
 

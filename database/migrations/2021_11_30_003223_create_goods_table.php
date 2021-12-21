@@ -27,6 +27,13 @@ class CreateGoodsTable extends Migration
             $table->tinyInteger('is_recommend')->default('0')->comment('是否推荐：0 不推荐、1 推荐');
             $table->text('details')->comment('详情');
             $table->timestamps();
+
+            // 创建普通索引，查询条件
+            $table->index('category_id');
+            // 模糊查询，索引是否失效
+            $table->index('title');
+            $table->index('is_on');
+            $table->index('is_recommend');
         });
     }
 

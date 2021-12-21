@@ -22,6 +22,8 @@ class CreateCommentsTable extends Migration
             $table->string('reply')->nullable()->comment('商家的回复');
             $table->json('pics')->nullable()->comment('多个评论图片');
             $table->timestamps();
+            $table->index('rate');
+            $table->index('goods_id');
         });
     }
 
