@@ -32,7 +32,7 @@ class PermissionSeeder extends Seeder
         }
 
         // 添加角色
-        $roles = ['name'=>'super-admin', 'zh_name'=>'超级管理员', 'guard_name'=>'api'];
+        $roles = ['name'=>'super_admin', 'zh_name'=>'超级管理员', 'guard_name'=>'api'];
         $role = Role::create($roles);
 
         // 为角色添加权限

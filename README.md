@@ -442,3 +442,7 @@ config\auth.php
         ],
     ],
 ```
+
+# 数据填充
+一个一个调用seeder太麻烦，可以在`database\seeders\DatabaseSeeder.php`中调用
+> php artisan make:seeder

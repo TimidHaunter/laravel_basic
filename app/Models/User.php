@@ -17,7 +17,7 @@ class User extends Authenticatable implements JWTSubject
     use HasRoles;
 
     // 看守器名字
-//    protected $guard_name = 'api';
+    protected $guard_name = 'api';
 
     /**
      * The attributes that are mass assignable.
