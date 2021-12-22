@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Slide;
 use Illuminate\Database\Seeder;
 
 class SlideSeeder extends Seeder
@@ -13,6 +14,6 @@ class SlideSeeder extends Seeder
      */
     public function run()
     {
-
+        Slide::factory()->count(10)->create();
     }
 }
