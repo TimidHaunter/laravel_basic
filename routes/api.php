@@ -51,5 +51,19 @@ $api = app('Dingo\Api\Routing\Router');
 //        $api->get('inner2', [\App\Http\Controllers\TestController::class, 'inner2']);
 //    });
 //});
+$params = [
+    'middleware' => 'api.throttle',
+    'limit' => 60,
+    'expires' => 1
+];
+
+$api->version('v1', $params, function ($api){
+    // 首页数据
+    $api->get('/index', [\App\Http\Controllers\Api\IndexController::class, 'index']);
 
 
+    // 需要登录的路由
+    $api->group(['middleware' => 'api.auth'], function ($api) {
+
+    });
+});

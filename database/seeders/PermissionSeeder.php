@@ -30,6 +30,14 @@ class PermissionSeeder extends Seeder
             ['name'=>'category.show',  'zh_name'=>'分类详情', 'guard_name'=>'api'],
             ['name'=>'category.update',  'zh_name'=>'分类更新', 'guard_name'=>'api'],
             ['name'=>'category.status',  'zh_name'=>'分类禁、启用', 'guard_name'=>'api'],
+
+            ['name'=>'slides.index', 'zh_name'=>'轮播图列表', 'guard_name'=>'api'],
+            ['name'=>'slides.store', 'zh_name'=>'轮播图添加', 'guard_name'=>'api'],
+            ['name'=>'slides.show', 'zh_name'=>'轮播图详情', 'guard_name'=>'api'],
+            ['name'=>'slides.update', 'zh_name'=>'轮播图更新', 'guard_name'=>'api'],
+            ['name'=>'slides.destroy', 'zh_name'=>'轮播图删除', 'guard_name'=>'api'],
+
+
         ];
 
 //        Permission::insert($permissions);
@@ -47,6 +55,9 @@ class PermissionSeeder extends Seeder
         // 分类管理员
         $roles = ['name'=>'admin_category', 'zh_name'=>'分类管理员', 'guard_name'=>'api'];
         $role = Role::create($roles);
-        $role->givePermissionTo('category.index', 'category.store', 'category.store', 'category.update', 'category.status');
+        // 给角色添加权限，只能一个一个加吗？
+        $permissions = ['category.index', 'category.store', 'category.store', 'category.update', 'category.status'];
+
+        $role->givePermissionTo($permissions);
     }
 }
