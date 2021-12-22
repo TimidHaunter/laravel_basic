@@ -461,3 +461,19 @@ $routeMiddleware
 刷新所有数据迁移，并数据填充
 > php artisan migrate:refresh --seed
 
+# 数据测试 faker
+[数据库测试](https://learnku.com/docs/laravel/8.x/database-testing/9416#writing-factories)
+[Faker 中文文档](https://www.cnblogs.com/hjcan/p/11551216.html)
+
+php artisan tinker
+
+faker 支持中文
+> config/app.php
+> 'faker_locale' => 'zh_CN',
+
+修改图片源
+我还以为可以修改图片源，哈哈哈。
+
+创建工厂去添加
+> php artisan make:factory GoodsFactory --model=Goods
+

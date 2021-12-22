@@ -14,7 +14,6 @@ class IndexController extends BaseController
      */
     public function index()
     {
-//        return ['api/index'];
         // 轮播图
         $slides = Slide::where('status', 1)
             ->orderBy('seq')
@@ -27,6 +26,8 @@ class IndexController extends BaseController
         $goods = Goods::where('is_on', 1)
             ->where('is_recommend', 1)
             ->get();
+
+
         return $this->response->array([
             'slides' => $slides,
             'category' => $category,
