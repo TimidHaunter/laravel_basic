@@ -477,3 +477,6 @@ faker 支持中文
 创建工厂去添加
 > php artisan make:factory GoodsFactory --model=Goods
 
+# 修改器
+
+

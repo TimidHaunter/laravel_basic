@@ -116,6 +116,16 @@ if(!function_exists('oss_url'))
 {
     function oss_url($key)
     {
+        // 如果没有$key
+        if (empty($key)) return '';
+
+        // 如果 $key 包含了 http 等，是一个完整的地址，直接返回 key
+        if (strpos($key, 'http') !== false
+            || strpos($key, 'https') !== false
+            || (strpos($key, 'data:image')) !== false) {
+            return $key;
+        }
+
         return config('filesystems')['disks']['oss']['bucket_url'] . '/' . $key;
     }
 }

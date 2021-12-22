@@ -20,6 +20,17 @@ class Goods extends Model
     ];
 
     /**
+     * 追加额外的属性
+     */
+    protected $appends = ['cover_url'];
+
+    // 修改器
+    public function getCoverUrlAttribute()
+    {
+        return oss_url($this->cover);
+    }
+
+    /**
      * 创建商品和分类的关联
      */
     public function category()
