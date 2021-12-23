@@ -16,7 +16,7 @@ class GoodsFactory extends Factory
     {
         // 查询分类group=goods，level=3的id
         $categoryId = Category::where('level', 3)->where('group', 'goods')->pluck('id');
-
+//        dd($categoryId);
         return [
             // 批量添加商品数据
             'user_id' => 1,

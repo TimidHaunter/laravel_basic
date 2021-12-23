@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Address;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OrderFactory extends Factory
@@ -13,12 +14,16 @@ class OrderFactory extends Factory
      */
     public function definition()
     {
+        $addresIds = Address::where('city', '>', 0)->pluck('code');
+//        dd($addresIds);
+
+
         $orders = [
             'user_id' => 1,
             'order_no' => $this->faker->randomNumber(9, true),
             'amount' => $this->faker->numberBetween(10, 9999999),
             'status' => $this->faker->numberBetween(1, 4),
-            'address_id' => '110000',
+            'address_id' => $this->faker->randomElement($addresIds),
             'express_type' => '',
             'express_no' => '',
             'pay_time' => null,
