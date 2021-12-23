@@ -51,8 +51,14 @@ $api = app('Dingo\Api\Routing\Router');
 //        $api->get('inner2', [\App\Http\Controllers\TestController::class, 'inner2']);
 //    });
 //});
+
+
 $params = [
-    'middleware' => 'api.throttle',
+    'middleware' => [
+        'api.throttle',
+        'serializer:array', // 减少 transformer 包裹层
+        'bindings'          // 支持路由模型注入
+    ],
     'limit' => 60,
     'expires' => 1
 ];
@@ -64,6 +70,13 @@ $api->version('v1', $params, function ($api){
 
     // 需要登录的路由
     $api->group(['middleware' => 'api.auth'], function ($api) {
+        /**
+         * 个人中心
+         */
+        // 用户详情
+        $api->get('/user', [\App\Http\Controllers\Api\UserController::class, 'userInfo']);
 
+        // 更新用户信息
+        $api->put('/user', [\App\Http\Controllers\Api\UserController::class, 'updateUserInfo']);
     });
 });

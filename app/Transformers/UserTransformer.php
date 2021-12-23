@@ -17,7 +17,8 @@ class UserTransformer extends TransformerAbstract
             'name'        => $user->name,
             'email'       => $user->email,
             'is_locked'   => $user->is_locked,
-            'created_at'  => $user->created_at ? $user->created_at : '时间遥远'
+            'created_at'  => $user->created_at ? $user->created_at : '时间遥远',
+            'updated_at'  => $user->updated_at ? $user->updated_at : '时间遥远',
         ];
     }
 }
