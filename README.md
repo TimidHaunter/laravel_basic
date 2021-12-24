@@ -479,4 +479,5 @@ faker 支持中文
 
 # 修改器
 
-
+# Redis
+直接使用门面 `Redis::set()`，Docker PHP 容器访问 Redis 容器，使用容器名 redis，而不是 127.0.0.1
