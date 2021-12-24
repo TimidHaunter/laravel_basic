@@ -21,6 +21,8 @@ $api->version('v1', ['middleware' => 'api.throttle', 'limit' => 60, 'expires' =>
 
         // 阿里云OSS Token
         $api->get('oss/token', [\App\Http\Controllers\Auth\OssController::class, 'token']);
+        // 用户修改密码
+        $api->put('password/update', [\App\Http\Controllers\Auth\PasswordController::class, 'updatePassword']);
     });
 
 });
