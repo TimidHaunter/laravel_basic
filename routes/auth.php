@@ -23,6 +23,11 @@ $api->version('v1', ['middleware' => 'api.throttle', 'limit' => 60, 'expires' =>
         $api->get('oss/token', [\App\Http\Controllers\Auth\OssController::class, 'token']);
         // 用户修改密码
         $api->put('password/update', [\App\Http\Controllers\Auth\PasswordController::class, 'updatePassword']);
+
+        // 发送邮件验证码
+        $api->post('email/code', [\App\Http\Controllers\Auth\BindController::class, 'emailCode']);
+        // 接受验证码，验证code，修改邮件
+        $api->post('email/update', [\App\Http\Controllers\Auth\BindController::class, 'updateEmail']);
     });
 
 });

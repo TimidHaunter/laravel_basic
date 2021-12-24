@@ -7,6 +7,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
+/**
+ * 发货通知邮件
+ */
 class OrderPost extends Mailable
 {
     use Queueable, SerializesModels;

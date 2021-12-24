@@ -7,6 +7,7 @@ return [
     /*
     |--------------------------------------------------------------------------
     | Default Cache Store
+    | 默认缓存类型
     |--------------------------------------------------------------------------
     |
     | This option controls the default cache connection that gets used while
