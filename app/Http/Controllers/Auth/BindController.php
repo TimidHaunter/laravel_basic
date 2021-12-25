@@ -32,7 +32,12 @@ class BindController extends BaseController
 ////        Cache::store('redis')->setex($key, 30*60, md5($email.$code));
 //        Redis::setex($key, 30*60, md5($email.$code));
 
-        Mail::to($email)->send(new SendCode($email));
+        // 直接使用发送邮件
+//        Mail::to($email)->send(new SendCode($email));
+
+        // 使用队列发送邮件
+        Mail::to($email)->queue(new SendCode($email));
+
         return $this->response->noContent();
     }
 

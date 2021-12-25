@@ -283,9 +283,14 @@ QUEUE_CONNECTION=database
 > php artisan queue:work
 
 # 队列的守护进程
+Laravel 队列，需要执行 `php artisan queue:work`，有时候命令会终止，需要有一个看守人员盯着。pid 终止的时候自动拉起来。
+
 [Docker内部使用Supervisor](https://www.voidking.com/dev-docker-supervisor/)
+
+php 容器安装守护进程
+
 查看队列守护进程的状态
-> sudo supervisorctl status
+> supervisorctl status
 ```shell
 /usr/local/software # supervisorctl status
 unix:///run/supervisord.sock no such file
@@ -311,9 +316,15 @@ Alpine 安装 Supervisor
 
 配置守护进程文件
 /etc/supervisor.conf
+
+mkdir /etc/supervisor.d
+
 ```
 [include]
 files = /etc/supervisor.d/*.ini
+
+改为
+files = /etc/supervisor.d/*.conf
 ```
 
 ```
@@ -334,8 +345,8 @@ nodaemon=true 设置supervisor为前台进程
 [supervisorctl]
 
 
-
-[program:yintian-shop]
+# 示例
+[program:yintian_send_code]
 process_name=%(program_name)s_%(process_num)02d
 command=php /www/laravel_basic/artisan queue:work
 autostart=true
@@ -354,6 +365,9 @@ nodaemon=true
 
 开启守护进程
 > supervisord -c /etc/supervisord.conf
+> supervisord
+
+怎么放到后台启动？
 
 
 # 事件
