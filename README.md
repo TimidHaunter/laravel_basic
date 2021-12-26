@@ -282,6 +282,25 @@ QUEUE_CONNECTION=database
 运行队列
 > php artisan queue:work
 
+不管修改了队列的什么配置，都需要 `重启` 队列
+比如邮箱密码
+重启守护进程就行
+```
+$ supervisorctl status
+yintian_send_code:yintian_send_code_00   RUNNING   pid 78, uptime 1 day, 21:36:16
+yintian_send_code:yintian_send_code_01   RUNNING   pid 57, uptime 1 day, 23:15:17
+
+$ supervisorctl restart yintian_send_code:yintian_send_code_01
+yintian_send_code:yintian_send_code_01: stopped
+yintian_send_code:yintian_send_code_01: started
+
+$ supervisorctl status
+yintian_send_code:yintian_send_code_00   RUNNING   pid 78, uptime 1 day, 21:44:14
+yintian_send_code:yintian_send_code_01   RUNNING   pid 91, uptime 0:00:05
+
+```
+
+
 # 队列的守护进程
 Laravel 队列，需要执行 `php artisan queue:work`，有时候命令会终止，需要有一个看守人员盯着。pid 终止的时候自动拉起来。
 
