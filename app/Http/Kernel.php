@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'check.permission' =>\App\Http\Middleware\CheckPermission::class,
         'check.phone.code' =>\App\Http\Middleware\CheckPhoneCode::class,
+        'check.email.code' =>\App\Http\Middleware\CheckEmailCode::class,
     ];
 }

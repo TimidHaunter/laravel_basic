@@ -20,6 +20,7 @@ class BindController extends BaseController
     {
         // 中间件只针对某些方法生效
         $this->middleware(['check.phone.code'])->only(['updatePhone']);
+        $this->middleware('check.email.code')->only('updateEmail');
     }
 
     /**
@@ -53,26 +54,11 @@ class BindController extends BaseController
      */
     public function updateEmail(Request $request)
     {
-        $request->validate([
-            'code'  => 'required',
-            'email' => 'required|email',
-        ]);
 
-        // 验证 code
-        $email = $request->input('email');
-        $code = $request->input('code');
-
-        $key = 'user::' . auth('api')->id() . '::email_code';
-        if (Redis::get($key) != md5($email . $code)) {
-            return $this->response->errorBadRequest('验证码或邮箱错误!');
-        }
-
-        // 清空缓存
-        Redis::del($key);
 
         // 更新用户邮箱
         $user = auth('api')->user();
-        $user->email = $email;
+        $user->email = $request->input('email');
         $user->save();
 
         return $this->response->noContent();
