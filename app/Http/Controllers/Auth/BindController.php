@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\SendSms;
 use App\Http\Controllers\BaseController;
 use App\Mail\SendCode;
 use Illuminate\Http\Request;
@@ -15,6 +16,12 @@ use Illuminate\Support\Facades\Redis;
  */
 class BindController extends BaseController
 {
+    public function __construct()
+    {
+        // 中间件只针对某些方法生效
+        $this->middleware(['check.phone.code'])->only(['updatePhone']);
+    }
+
     /**
      * 获取邮件验证码
      */
@@ -66,6 +73,56 @@ class BindController extends BaseController
         // 更新用户邮箱
         $user = auth('api')->user();
         $user->email = $email;
+        $user->save();
+
+        return $this->response->noContent();
+    }
+
+    /**
+     * 发送手机验证码
+     */
+    public function phoneCode(Request $request)
+    {
+        $request->validate([
+            'phone' => 'required|regex:/^1[3-9]\d{9}$/',
+        ]);
+
+        // 事件，发送短信事件
+        // 调用事件
+        $phone = $request->input('phone');
+        $userId = auth('api')->id();
+//        $product = $request->input('product');
+        SendSms::dispatch($phone, $userId);
+
+
+        return $this->response->noContent();
+    }
+
+    /**
+     * 验证手机号
+     */
+    public function updatePhone(Request $request)
+    {
+        $request->validate([
+            'code'  => 'required',
+            'phone' => 'required',
+        ]);
+
+        // 验证 code
+        $phone = $request->input('phone');
+        $code = $request->input('code');
+
+        $key = 'user::' . auth('api')->id() . '::phone_code';
+        if (Redis::get($key) != md5($phone . $code)) {
+            return $this->response->errorBadRequest('验证码或手机号错误!');
+        }
+
+        // 清空缓存
+        Redis::del($key);
+
+        // 更新用户邮箱
+        $user = auth('api')->user();
+        $user->phone = $phone;
         $user->save();
 
         return $this->response->noContent();

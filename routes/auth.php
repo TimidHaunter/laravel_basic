@@ -28,6 +28,12 @@ $api->version('v1', ['middleware' => 'api.throttle', 'limit' => 60, 'expires' =>
         $api->post('email/code', [\App\Http\Controllers\Auth\BindController::class, 'emailCode']);
         // 接受验证码，验证code，修改邮件
         $api->post('email/update', [\App\Http\Controllers\Auth\BindController::class, 'updateEmail']);
+
+
+        // 发送手机验证码
+        $api->post('phone/code', [\App\Http\Controllers\Auth\BindController::class, 'phoneCode']);
+        // 接受验证码，验证code，更换手机
+        $api->post('phone/update', [\App\Http\Controllers\Auth\BindController::class, 'updatePhone']);
     });
 
 });

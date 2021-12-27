@@ -12,6 +12,7 @@ class EventServiceProvider extends ServiceProvider
     /**
      * The event listener mappings for the application.
      * 应用程序的事件监听器映射
+     * 注册事件
      *
      * @var array
      */
@@ -23,6 +24,11 @@ class EventServiceProvider extends ServiceProvider
         // SendEmailToOrderUser 监听者
         'App\Events\OrderPost' => [
             'App\Listeners\SendEmailToOrderUser',
+        ],
+        // SendSms
+        // SendSmsListener
+        'App\Events\SendSms' => [
+            'App\Listeners\SendSmsListener',
         ],
     ];
 

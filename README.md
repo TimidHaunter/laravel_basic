@@ -198,8 +198,6 @@ composer dump-autoload
 # 观察者
 (事件，观察者)[https://www.cnblogs.com/mouseleo/p/8668001.html]
 > php artisan make:observer CategoryObser --model=Category
-在服务容器里注册
-`Providers/AppServiceProvider.php`
 ```php
 <?php
 public function boot()
@@ -412,14 +410,25 @@ protected $listen = [
     'App\Events\OrderPost' => [
         'App\Listeners\SendEmailToOrderUser',
     ],
+    'App\Events\SendSms' => [
+        'App\Listeners\SendSmsListener',
+    ],
 ];
 ```
-再执行命令
+创建事件和监听者
 > php artisan event:generate
 > Events and listeners generated successfully!
 
 生成事件 `app/Events/OrderPost.php` 和监听者 `app/Listeners/SendEmailToOrderUser.php` 两个文件
-监听者监听事件
+
+![image-20211227174245245](/Users/yintianxiong/Library/Application Support/typora-user-images/image-20211227174245245.png)
+
+监听者监听事件，事件一旦被触发，会通知所有监听者
+调用事件
+```php
+<?php
+SendSms::dispatch($phone);
+```
 
 # 增加字段，迁移文件
 > php artisan make:migration add_group_to_category_tables --table=categories
@@ -514,3 +523,19 @@ faker 支持中文
 
 # Redis
 直接使用门面 `Redis::set()`，Docker PHP 容器访问 Redis 容器，使用容器名 redis，而不是 127.0.0.1
+
+# 阿里短信服务
+[阿里短信文档](https://help.aliyun.com/product/44282.html?spm=5176.21213303.J_6704733920.7.5ff13edah2sTTW&scm=20140722.S_help%40%40%E4%BA%A7%E5%93%81%E9%A1%B5%40%4044282.S_os%2Bhot.ID_44282-RL_%E7%9F%AD%E4%BF%A1-OR_helpmain-V_2-P0_0)
+
+安装一个第三方封装包
+> composer require overtrue/easy-sms
+[easy-sms文档](http://packagist.p2hp.com/packages/overtrue/easy-sms)
+
+临时接收短信的云手机，防止自己的手机收到垃圾短信
+[z-sms](www.z-sms.com)
+
+创建 AccessKey 子账号，分配相应权限，得到
+```
+'access_key_id' => '',
+'access_key_secret' => '',
+```
