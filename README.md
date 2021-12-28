@@ -196,7 +196,7 @@ composer dump-autoload
 > post 默认参数使用 Boby x-www-form-urlencoded
 
 # 观察者
-(事件，观察者)[https://www.cnblogs.com/mouseleo/p/8668001.html]
+(观察者)[https://www.cnblogs.com/mouseleo/p/8668001.html]
 > php artisan make:observer CategoryObser --model=Category
 ```php
 <?php
