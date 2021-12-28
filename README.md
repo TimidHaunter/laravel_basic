@@ -195,8 +195,10 @@ composer dump-autoload
 # postman
 > post 默认参数使用 Boby x-www-form-urlencoded
 
-# 观察者
-(观察者)[https://www.cnblogs.com/mouseleo/p/8668001.html]
+# Eloquent 观察者
+[Laravel 的 Events(事件) 及 Observers(观察者)](https://www.cnblogs.com/mouseleo/p/8668001.html)
+[Laravel 中的模型事件与 Observer](https://learnku.com/articles/6657/model-events-and-observer-in-laravel)
+创建一个观察者
 > php artisan make:observer CategoryObser --model=Category
 ```php
 <?php
