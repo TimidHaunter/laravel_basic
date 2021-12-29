@@ -15,6 +15,7 @@ class IndexController extends BaseController
     public function index()
     {
         // 轮播图
+        // 返回 img_url，加修改器
         $slides = Slide::where('status', 1)
             ->orderBy('seq')
             ->get();
