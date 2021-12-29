@@ -34,4 +34,22 @@ class UserController extends BaseController
 
         return $this->response->noContent();
     }
+
+    /**
+     * 更换用户头像
+     */
+    public function updateAvatar(Request $request)
+    {
+        $request->validate([
+            'avatar' => 'required',
+        ],[
+            'avatar.required' => '用户头像 不能为空',
+        ]);
+
+        $user = auth('api')->user();
+        $user->avatar = $request->input('avatar');
+        $user->save();
+
+        return $this->response->noContent();
+    }
 }

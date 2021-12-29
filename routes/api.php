@@ -78,5 +78,8 @@ $api->version('v1', $params, function ($api){
 
         // 更新用户信息
         $api->put('/user', [\App\Http\Controllers\Api\UserController::class, 'updateUserInfo']);
+
+        // 更新头像
+        $api->patch('/user/avatar', [\App\Http\Controllers\Api\UserController::class, 'updateAvatar']);
     });
 });
