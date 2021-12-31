@@ -67,6 +67,9 @@ $api->version('v1', $params, function ($api){
     // 首页数据
     $api->get('/index', [\App\Http\Controllers\Api\IndexController::class, 'index']);
 
+    // 商品详情
+    $api->get('/goods/{good}', [\App\Http\Controllers\Api\GoodsController::class, 'show']);
+
 
     // 需要登录的路由
     $api->group(['middleware' => 'api.auth'], function ($api) {
