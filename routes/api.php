@@ -84,5 +84,6 @@ $api->version('v1', $params, function ($api){
 
         // 更新头像
         $api->patch('/user/avatar', [\App\Http\Controllers\Api\UserController::class, 'updateAvatar']);
+
     });
 });
