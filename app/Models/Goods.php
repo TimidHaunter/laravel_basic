@@ -22,13 +22,31 @@ class Goods extends Model
     /**
      * 追加额外的属性
      */
-    protected $appends = ['cover_url'];
+    protected $appends = [
+        'cover_url',
+        'pics_url'
+    ];
 
-    // 修改器
+    /*
+     * oss_url 修改器
+     */
     public function getCoverUrlAttribute()
     {
         return oss_url($this->cover);
     }
+
+    /**
+     * pics_url 修改器
+     * getXXXXAttribute
+     */
+    public function getPicsUrlAttribute()
+    {
+        // 遍历 $this->pics
+        return collect($this->pics)->map(function ($item){
+            return oss_url($item);
+        });
+    }
+
 
     /**
      * 创建商品和分类的关联
