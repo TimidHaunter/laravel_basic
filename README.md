@@ -519,7 +519,11 @@ faker 支持中文
 我还以为可以修改图片源，哈哈哈。
 
 创建工厂去添加
-> php artisan make:factory GoodsFactory --model=Goods
+> php artisan make:factory CommentFactory --model=Comment
+
+执行命令去创造数据
+> php artisan make:seeder CommentSeeder
+> php artisan db:seed --class=CommentSeeder
 
 # 修改器
 > getXXXXAttribute
