@@ -41,7 +41,7 @@ class Goods extends Model
      */
     public function getPicsUrlAttribute()
     {
-        // 遍历 $this->pics
+        // 使用集合处理每一项 $this->pics 元素，返回新的集合
         return collect($this->pics)->map(function ($item){
             return oss_url($item);
         });

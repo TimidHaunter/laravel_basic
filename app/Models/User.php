@@ -58,4 +58,14 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    /**
+     * 用户头像追加 URL
+     */
+    protected $appends = ['avatar_url'];
+
+    public function getAvatarUrlAttribute()
+    {
+        return oss_url($this->avatar);
+    }
 }
