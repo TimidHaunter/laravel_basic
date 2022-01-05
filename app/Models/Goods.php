@@ -20,11 +20,11 @@ class Goods extends Model
     ];
 
     /**
-     * 追加额外的属性
+     * 自动追加额外的属性
      */
     protected $appends = [
         'cover_url',
-        'pics_url'
+//        'pics_url'
     ];
 
     /*
