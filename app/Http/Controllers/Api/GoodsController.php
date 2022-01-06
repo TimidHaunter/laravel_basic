@@ -18,8 +18,13 @@ class GoodsController extends BaseController
         $title = $request->input('title');
         $categoryId = $request->input('category_id');
 
+        // 排序
+        $sales = $request->input('sales');
+        $price = $request->input('price');
+        $commentCount = $request->input('comment_count');
+
         // 商品分页数据
-        $goods = Goods::select('id', 'title', 'price', 'cover', 'pics', 'category_id')
+        $goods = Goods::select('id', 'title', 'price', 'cover', 'pics', 'category_id', 'sales', 'updated_at')
             ->where('is_on', 1)
             // 当 title 存在，调用匿名函数
             ->when($title, function ($query) use ($title){
@@ -29,14 +34,33 @@ class GoodsController extends BaseController
             ->when($categoryId, function ($query) use ($categoryId){
                 $query->where('category_id', $categoryId);
             })
-
+            // 按照销量排序
+            ->when($sales == 1, function ($query) use ($sales){
+                $query->orderBy('sales', 'desc');
+            })
+            // 按照价格排序
+            ->when($price == 1, function ($query) use ($price){
+                $query->orderBy('price', 'desc');
+            })
             ->withCount('comments')
+            // 按照评论格排序
+            ->when($commentCount == 1, function ($query) use ($price){
+                $query->orderBy('comments_count', 'desc');
+            })
+
+
+            // 默认排序
+            ->orderBy('updated_at', 'desc')
+
             ->simplePaginate(20)
 
             // 给分页链接追加属性
             ->appends([
                 'title' => $title,
-                'category_id' => $categoryId
+                'category_id' => $categoryId,
+                'sales' => $sales,
+                'price' => $price,
+                'comment_count' => $commentCount
             ]);
 
         // 推荐商品
