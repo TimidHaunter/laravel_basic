@@ -70,6 +70,8 @@ $api->version('v1', $params, function ($api){
     // 商品详情
     $api->get('/goods/{good}', [\App\Http\Controllers\Api\GoodsController::class, 'show']);
 
+    // 商品列表
+    $api->get('/goods', [\App\Http\Controllers\Api\GoodsController::class, 'index']);
 
     // 需要登录的路由
     $api->group(['middleware' => 'api.auth'], function ($api) {
