@@ -87,5 +87,14 @@ $api->version('v1', $params, function ($api){
         // 更新头像
         $api->patch('/user/avatar', [\App\Http\Controllers\Api\UserController::class, 'updateAvatar']);
 
+
+        /**
+         * 购物车路由，资源路由
+         * REST 资源命名指南
+         * http://restful.p2hp.com/home/resource-naming
+         */
+        $api->resource('carts', \App\Http\Controllers\Api\CartController::class, [
+            'except' => ['show']
+        ]);
     });
 });
