@@ -162,6 +162,13 @@ composer require dingo/api
 [表单验证](https://learnku.com/docs/laravel/8.5/validation/10378)
 > php artisan make:request Auth/RegisterRequest
 
+也可以直接验证
+```php
+<?php
+$request->validate([验证规则],[提示]);
+```
+验证规则也可以自定义，就不要了使用|，使用数组[]
+
 # 语言包
 `resources\lang`
 > composer require laravel-lang/lang:~8.0

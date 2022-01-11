@@ -17,7 +17,7 @@ class CreateCartsTable extends Migration
             $table->id();
             $table->integer('user_id')->comment('用户ID');
             $table->integer('goods_id')->comment('商品ID');
-            $table->integer('num')->comment('商品数量');
+            $table->integer('num')->default(1)->comment('商品数量');
             $table->tinyInteger('is_checked')->default(1)->comment('是否选择：0不选；1选中');
             $table->timestamps();
         });
