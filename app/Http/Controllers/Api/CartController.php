@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\BaseController;
 use App\Models\Cart;
+use App\Transformers\CartTransformer;
 use Illuminate\Http\Request;
 
 class CartController extends BaseController
@@ -14,7 +15,8 @@ class CartController extends BaseController
      */
     public function index()
     {
-        //
+        $carts = Cart::where('user_id', auth('api')->id())->get();
+        return $this->response->collection($carts, new CartTransformer());
     }
 
     /**
