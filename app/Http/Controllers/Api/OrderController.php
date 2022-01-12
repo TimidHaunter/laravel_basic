@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\BaseController;
 use App\Models\Cart;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends BaseController
 {
@@ -33,4 +35,72 @@ class OrderController extends BaseController
             'carts'   => $carts,
         ]);
     }
+
+    /**
+     * 提交订单
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'address_id' => 'required', // TODO 地址要在地址表中存在 exists:address,id
+        ],[
+            'address_id.required' => '收货地址不能为空'
+        ]);
+
+        // 处理数据
+        $user_id = auth('api')->id();
+        $order_no = date('YmdHis') . rand(100000, 999999);
+//        return $order_no;
+
+        // 总金额
+        $amount = 0;
+        // 查出购物车数据
+        $cartsQuery = Cart::where('user_id', $user_id)
+                ->where('is_checked', 1)
+                ->with('goods:id,price');
+
+        $carts = $cartsQuery->get();
+
+        // 要插入的订单详情数据
+        $insertData = [];
+
+        foreach ($carts as $key => $cart) {
+            $amount += $cart->goods->price * $cart->num;
+            $insertData[] = [
+                'goods_id' => $cart->goods_id,
+                'price' => $cart->goods->price,
+                'num' => $cart->num,
+            ];
+        }
+
+//        return $amount;
+
+        // 操作三个数据动作
+        // 数据库事务
+        try {
+            DB::beginTransaction();
+
+            // 生成订单
+            $order = Order::create([
+                'user_id' => $user_id,
+                'order_no' => $order_no,
+                'address_id' => $request->input('address_id'),
+                'amount' => $amount,
+            ]);
+
+            // 生成订单详情，一条一条商品
+            $order->orderDetails()->createMany($insertData);
+
+            // 删除已经结算购物车商品
+            $cartsQuery->delete();
+
+            DB::commit();
+
+            return $this->response->created();
+        } catch(\Exception $e){
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
 }

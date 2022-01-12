@@ -9,6 +9,8 @@ class OrderDetails extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['order_id', 'goods_id', 'price', 'num'];
+
     /**
      * 所关联的商品
      */

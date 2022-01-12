@@ -9,6 +9,9 @@ class Order extends Model
 {
     use HasFactory;
 
+    // 可以批量赋值的字段
+    protected $fillable = ['user_id', 'order_no', 'address_id', 'amount'];
+
     /**
      * 和用户的关联
      */

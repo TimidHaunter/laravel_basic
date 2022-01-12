@@ -101,8 +101,9 @@ $api->version('v1', $params, function ($api){
          * 订单
          */
         // 订单预览页
-        $api->get('/order/preview', [\App\Http\Controllers\Api\OrderController::class, 'preview']);
-
+        $api->get('/orders/preview', [\App\Http\Controllers\Api\OrderController::class, 'preview']);
+        // 提交订单，生成订单
+        $api->post('/orders', [\App\Http\Controllers\Api\OrderController::class, 'store']);
 
     });
 });
