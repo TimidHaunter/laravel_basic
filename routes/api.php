@@ -96,5 +96,13 @@ $api->version('v1', $params, function ($api){
         $api->resource('carts', \App\Http\Controllers\Api\CartController::class, [
             'except' => ['show']
         ]);
+
+        /**
+         * 订单
+         */
+        // 订单预览页
+        $api->get('/order/preview', [\App\Http\Controllers\Api\OrderController::class, 'preview']);
+
+
     });
 });
