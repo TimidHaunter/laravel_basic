@@ -57,7 +57,7 @@ class OrderController extends BaseController
         // 查出购物车数据
         $cartsQuery = Cart::where('user_id', $user_id)
                 ->where('is_checked', 1)
-                ->with('goods:id,price');
+                ->with('goods:id,price,stock,title');
 
         $carts = $cartsQuery->get();
 
@@ -65,6 +65,11 @@ class OrderController extends BaseController
         $insertData = [];
 
         foreach ($carts as $key => $cart) {
+            // 如果有商品库存不足，提示用户重新选择
+            if ($cart->goods->stock < $cart->num) {
+                return $this->response->errorBadRequest($cart->goods->title . ' 库存不足，请重新选择商品');
+            }
+
             $amount += $cart->goods->price * $cart->num;
             $insertData[] = [
                 'goods_id' => $cart->goods_id,
@@ -93,6 +98,9 @@ class OrderController extends BaseController
 
             // 删除已经结算购物车商品
             $cartsQuery->delete();
+
+            // 减去商品的库存量
+
 
             DB::commit();
 

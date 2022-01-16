@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\BaseController;
 use App\Models\Cart;
+use App\Models\Goods;
 use App\Transformers\CartTransformer;
 use Illuminate\Http\Request;
 
@@ -28,11 +29,31 @@ class CartController extends BaseController
         // 验证数据
         // exists:goods,id 在商品表里必须存在，且必须是ID
         $request->validate([
-            'goods_id' => 'required|exists:goods,id'
+            'goods_id' => 'required|exists:goods,id',
+            // 加入购物车数量不能超过库存数量
+            'num' => [
+                function ($attribute, $value, $fail) use ($request) {
+                    $goods = Goods::find($request->goods_id);
+                    if ($value > $goods->stock) {
+                        $fail('加入购物车的数量 不能超过库存');
+                    }
+                }
+            ]
         ],[
             'goods_id.required' => '商品 ID不能为空',
             'goods_id. exists' => '商品不存在',
         ]);
+
+        // 查询购物车数据是否存在
+        $cart = Cart::where('user_id', auth('api')->id())
+            ->where('goods_id', $request->input('goods_id'))
+            ->first();
+
+        if (!empty($cart)) {
+            $cart->num = $request->input('num', 1);
+            $cart->save();
+            return $this->response->noContent();
+        }
 
         Cart::create([
             'user_id' => auth('api')->id(),
