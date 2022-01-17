@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\BaseController;
 use App\Models\Cart;
+use App\Models\Goods;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -55,11 +56,10 @@ class OrderController extends BaseController
         // 总金额
         $amount = 0;
         // 查出购物车数据
-        $cartsQuery = Cart::where('user_id', $user_id)
-                ->where('is_checked', 1)
-                ->with('goods:id,price,stock,title');
-
-        $carts = $cartsQuery->get();
+        $carts = Cart::where('user_id', $user_id)
+            ->where('is_checked', 1)
+            ->with('goods:id,price,stock,title')
+            ->get();
 
         // 要插入的订单详情数据
         $insertData = [];
@@ -97,10 +97,18 @@ class OrderController extends BaseController
             $order->orderDetails()->createMany($insertData);
 
             // 删除已经结算购物车商品
-            $cartsQuery->delete();
+            Cart::where('user_id', $user_id)
+                ->where('is_checked', 1)
+                ->delete();
 
             // 减去商品的库存量
+            foreach ($carts as $cart) {
+                Goods::where('id', $cart->goods_id)->decrement('stock', $cart->num);
+            }
 
+            // 限购
+
+            // 订单有效期 10min 失效，失效后，减去的库存加回来
 
             DB::commit();
 

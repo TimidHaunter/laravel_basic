@@ -577,3 +577,18 @@ sync：同步主线或分支的Bug
 # MySQL 事务
 
 # 锁，并发
+
+# 计划任务
+监听状态
+Linux 里计划任务
+laravel 里任务调度
+在指定时间执行指定命令
+
+> * * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
+> * * * * * php /www/laravel_basic/artisan schedule:run >> /dev/null 2>&1 绝对路径执行命令
+主要执行 php artisan schedule:run 命令
+
+> crontab -e
+
+计划任务类
+`app\Console\Kernel.php`
