@@ -30,7 +30,7 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id')->comment('下单用户');
             $table->string('order_no')->comment('订单单号');
             $table->integer('amount')->comment('总金额，单位：分');
-            $table->tinyInteger('status')->default(1)->comment('订单状态 1下单 2支付 3发货 4收货');
+            $table->tinyInteger('status')->default(1)->comment('订单状态 1下单 2支付 3发货 4收货 5过期');
             $table->bigInteger('address_id')->comment('收货地址');
             $table->string('express_type')->nullable()->comment('快递类型 SF YT YD');
             $table->string('express_no')->nullable()->comment('快递单号');

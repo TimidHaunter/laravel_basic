@@ -592,3 +592,6 @@ laravel 里任务调度
 
 计划任务类
 `app\Console\Kernel.php`
+
+alpine linux crontab
+
