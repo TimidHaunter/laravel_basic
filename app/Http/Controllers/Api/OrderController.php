@@ -42,6 +42,11 @@ class OrderController extends BaseController
      */
     public function store(Request $request)
     {
+        // 测试远程一对多
+//        $order = Order::find(26);
+//        $goods = $order->goods;
+//        return $goods;
+
         $request->validate([
             'address_id' => 'required', // TODO 地址要在地址表中存在 exists:address,id
         ],[

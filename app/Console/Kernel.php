@@ -53,13 +53,14 @@ class Kernel extends ConsoleKernel
                 DB::beginTransaction();
 
                 // order->orderDetails->goods
+                // 远程一对多
                 foreach ($orders as $order) {
                     // 修改订单状态
                     $order->status = 5;
                     $order->save();
 
                     // 还原商品
-                    foreach ($order->orderDetails as $details)
+                    foreach ($order->goods as $details)
                     {
                         $details->goods->increment('stock', $details->num);
                     }

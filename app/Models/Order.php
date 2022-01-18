@@ -28,4 +28,21 @@ class Order extends Model
         // 一个订单有多个订单详情
         return $this->hasMany(OrderDetails::class, 'order_id', 'id');
     }
+
+    /**
+     * 远程一对多，订单关联的远程商品
+     * order->orderDetails->goods
+     */
+    public function goods()
+    {
+        return $this->hasManyThrough(
+            Goods::class, // 远程模型
+            OrderDetails::class, // 中间模型
+            'order_id', // 本模型和中间表关联的键
+            'id', // 远程模型的外键
+            'id', // 中间模型和远程模型的键
+            'goods_id' // 中间模型和远程模型关联的健
+        );
+    }
+
 }
