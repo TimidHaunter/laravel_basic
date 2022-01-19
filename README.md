@@ -333,6 +333,7 @@ Kernel \r on an \m (\l)
 Alpine | apk 包管理工具
 CentOS | yum
 Ubuntu | apt
+Debian | apt-get
 
 Alpine 安装 Supervisor
 > apk add --no-cache supervisor
@@ -584,8 +585,10 @@ Linux 里计划任务
 laravel 里任务调度
 在指定时间执行指定命令
 
-> * * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
-> * * * * * php /www/laravel_basic/artisan schedule:run >> /dev/null 2>&1 绝对路径执行命令
+```
+* * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
+* * * * * php /www/laravel_basic/artisan schedule:run >> /dev/null 2>&1 绝对路径执行命令
+```
 主要执行 php artisan schedule:run 命令
 
 > crontab -e
