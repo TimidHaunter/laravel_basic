@@ -530,8 +530,8 @@ faker 支持中文
 > php artisan make:factory CommentFactory --model=Comment
 
 执行命令去创造数据
-> php artisan make:seeder CommentSeeder
-> php artisan db:seed --class=CommentSeeder
+> php artisan make:seeder CommentSeeder # 创造数据
+> php artisan db:seed --class=CommentSeeder # 创造数据，两条命令都需要
 
 # 修改器
 > getXXXXAttribute
