@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class GoodsFactory extends Factory
@@ -17,9 +18,11 @@ class GoodsFactory extends Factory
         // 查询分类group=goods，level=3的id
         $categoryId = Category::where('level', 3)->where('group', 'goods')->pluck('id');
 //        dd($categoryId);
+
+        $userId = User::where('is_locked', 0)->pluck('id');
         return [
             // 批量添加商品数据
-            'user_id' => 1,
+            'user_id' => $this->faker->randomElement($userId),
             'category_id' => $this->faker->randomElement($categoryId),
             'title' => $this->faker->text(20),
             'description' => $this->faker->text(60),
