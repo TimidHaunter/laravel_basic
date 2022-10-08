@@ -598,3 +598,24 @@ laravel 里任务调度
 
 alpine linux crontab
 
+
+# 20221008
+laravel队列为不同的后台队列服务提供统一的API
+
+# 队列
+## 生成任务类
+```shell
+php artisan make:job SendMail
+```
+统一创建在app/Jobs中
+
+## 分发任务
+- 调用任务类 dispatch() 分发任务
+- dispatch((new Job)->onQueue('high'));
+- 
+
+# 延时队列
+```shell
+
+```
+
