@@ -47,6 +47,7 @@ return array(
     'App\\Http\\Requests\\Auth\\LoginRequest' => $baseDir . '/app/Http/Requests/Auth/LoginRequest.php',
     'App\\Http\\Requests\\Auth\\RegisterRequest' => $baseDir . '/app/Http/Requests/Auth/RegisterRequest.php',
     'App\\Http\\Requests\\BaseRequest' => $baseDir . '/app/Http/Requests/BaseRequest.php',
+    'App\\Jobs\\SendMail' => $baseDir . '/app/Jobs/SendMail.php',
     'App\\Listeners\\SendEmailToOrderUser' => $baseDir . '/app/Listeners/SendEmailToOrderUser.php',
     'App\\Listeners\\SendSmsListener' => $baseDir . '/app/Listeners/SendSmsListener.php',
     'App\\Mail\\OrderPost' => $baseDir . '/app/Mail/OrderPost.php',

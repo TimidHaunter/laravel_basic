@@ -203,8 +203,8 @@ class ComposerStaticInitc09a6e1797847b2a2229b72f9da2815b
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
         'Whoops\\' => 
         array (
@@ -360,8 +360,8 @@ class ComposerStaticInitc09a6e1797847b2a2229b72f9da2815b
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -630,6 +630,7 @@ class ComposerStaticInitc09a6e1797847b2a2229b72f9da2815b
         'App\\Http\\Requests\\Auth\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/LoginRequest.php',
         'App\\Http\\Requests\\Auth\\RegisterRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/RegisterRequest.php',
         'App\\Http\\Requests\\BaseRequest' => __DIR__ . '/../..' . '/app/Http/Requests/BaseRequest.php',
+        'App\\Jobs\\SendMail' => __DIR__ . '/../..' . '/app/Jobs/SendMail.php',
         'App\\Listeners\\SendEmailToOrderUser' => __DIR__ . '/../..' . '/app/Listeners/SendEmailToOrderUser.php',
         'App\\Listeners\\SendSmsListener' => __DIR__ . '/../..' . '/app/Listeners/SendSmsListener.php',
         'App\\Mail\\OrderPost' => __DIR__ . '/../..' . '/app/Mail/OrderPost.php',

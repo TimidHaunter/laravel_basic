@@ -64,7 +64,7 @@ return [
         # redis
         'redis' => [
             'driver' => 'redis',
-            # 使用database.php中redis的链接
+            # 使用database.php中redis的default链接
             'connection' => 'default',
             # 默认队列名字
             'queue' => env('REDIS_QUEUE', 'default'),
