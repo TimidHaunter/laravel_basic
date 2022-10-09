@@ -599,23 +599,47 @@ laravel 里任务调度
 alpine linux crontab
 
 
-# 20221008
+# 202210
 laravel队列为不同的后台队列服务提供统一的API
 
 # 队列
+使用Database
+## model
+```shell
+php artisan make:model SendMail
+```
+
+##生成数据库迁移文件
+```shell
+php artisan make:migration create_send_mail_tables --table=categories
+php artisan migrate
+##重新刷新
+php artisan migrate:refresh
+##带seed
+php artisan migrate:refresh --seed
+```
+
 ## 生成任务类
 ```shell
-php artisan make:job SendMail
+php artisan make:job SendMailDatabase
 ```
 统一创建在app/Jobs中
 
-## 分发任务
-- 调用任务类 dispatch() 分发任务
-- dispatch((new Job)->onQueue('high'));
-- 
-
-# 延时队列
 ```shell
-
+php artisan make:controller Queue/SendMailDatabaseController
 ```
+在app/Http/Controller/Queue
+
+使用Redis
+
+## 生成任务类
+```shell
+php artisan make:job SendMailRedis
+```
+统一创建在app/Jobs中
+
+```shell
+php artisan make:controller Queue/SendMailRedisController
+```
+在app/Http/Controller/Queue
 
