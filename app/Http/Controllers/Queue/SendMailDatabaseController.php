@@ -27,7 +27,7 @@ class SendMailDatabaseController extends BaseController
 
         $job = new SendMailDatabase($model);
         //延时
-        $job->delay(20);
+        $job->delay(200);
         //分发，入列
         $disRes = $this->dispatch($job);
 //        var_dump($dbRes, $disRes);

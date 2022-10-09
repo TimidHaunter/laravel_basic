@@ -27,6 +27,7 @@ class SendMailDatabase implements ShouldQueue
 
     /**
      * Execute the job.
+     * 当队列处理器从队列中取出任务时，会调用 handle() 方法
      *
      * @return void
      */
