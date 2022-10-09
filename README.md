@@ -643,3 +643,12 @@ php artisan make:controller Queue/SendMailRedisController
 ```
 在app/Http/Controller/Queue
 
+```shell
+php artisan queue:work
+php artisan queue:listen
+```
+
+##dispatch分发
+分发就是入列，Database和Redis只是存储介质。
+
+

@@ -18,16 +18,19 @@ class SendMailDatabaseController extends BaseController
             'content.required' => '邮箱内容 不能为空',
         ]);
 
-        //初始化数据库
+        //插入数据库
         $model = new SendMail();
         $model->email = $request->input('email');
         $model->content = $request->input('content');
         $model->status = $model->tries = 0;
-        $model->save();
-        $job = new SendMailDatabase($model);
-        $job->delay(10);
-        $this->dispatch($job);
+        $dbRes = $model->save();
 
+        $job = new SendMailDatabase($model);
+        //延时
+        $job->delay(20);
+        //分发，入列
+        $disRes = $this->dispatch($job);
+//        var_dump($dbRes, $disRes);
         return $this->response->noContent();
     }
 }

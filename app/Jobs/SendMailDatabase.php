@@ -32,9 +32,16 @@ class SendMailDatabase implements ShouldQueue
      */
     public function handle()
     {
-        //业务逻辑
+        //出列，处理业务逻辑
         $this->mail->status = 1;
         $this->mail->tries ++;
-        $this->mail->update();
+        $nowTime = date('Y-m-d H:i:s');
+
+        try {
+            $this->mail->update();
+            echo '[' . $nowTime . '] sendMail success!';
+        } catch (\Exception $e) {
+            echo '[' . $nowTime . '] sendMail fail, error: ' . $e->getMessage();
+        }
     }
 }
