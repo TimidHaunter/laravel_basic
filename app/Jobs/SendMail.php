@@ -49,7 +49,7 @@ class SendMail implements ShouldQueue
      * Execute the job.
      *
      * 当任务由队列处理时，将调用 handle 方法；
-     * 此
+     * 此处主要是
      *
      * @return void
      */
