@@ -9,6 +9,11 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
+/**
+ * 队列，存储机制使用数据库，需要建表
+ * php artisan queue:table jobs表
+ * php artisan migrate
+ */
 class SendMailDatabase implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;

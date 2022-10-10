@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Redis;
 use Spatie\Permission\Commands\CacheReset;
 
 /**
- * 使用队列机制发邮件
+ * 使用队列机制发邮件，存储机制是Redis
  */
 class SendMailRedis implements ShouldQueue
 {
@@ -88,9 +88,4 @@ class SendMailRedis implements ShouldQueue
             }
         }
     }
-
-//    public function dispatch()
-//    {
-//        Redis::rpush(Config::get('CacheConstKey.MAIL_ADD'), 1);
-//    }
 }
