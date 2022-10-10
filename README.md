@@ -654,3 +654,7 @@ php artisan queue:listen
 {"uuid":"7a5660e8-a237-4e96-b336-e2bf20ca287f","displayName":"App\\Jobs\\SendMailDatabase","job":"Illuminate\\Queue\\CallQueuedHandler@call","maxTries":null,"maxExceptions":null,"failOnTimeout":false,"backoff":null,"timeout":null,"retryUntil":null,"data":{"commandName":"App\\Jobs\\SendMailDatabase","command":"O:25:\"App\\Jobs\\SendMailDatabase\":11:{s:7:\"\u0000*\u0000mail\";O:45:\"Illuminate\\Contracts\\Database\\ModelIdentifier\":4:{s:5:\"class\";s:19:\"App\\Models\\SendMail\";s:2:\"id\";i:19;s:9:\"relations\";a:0:{}s:10:\"connection\";s:5:\"mysql\";}s:3:\"job\";N;s:10:\"connection\";N;s:5:\"queue\";N;s:15:\"chainConnection\";N;s:10:\"chainQueue\";N;s:19:\"chainCatchCallbacks\";N;s:5:\"delay\";i:200;s:11:\"afterCommit\";N;s:10:\"middleware\";a:0:{}s:7:\"chained\";a:0:{}}"}}
 ```
 
+# redis秒杀
+```shell
+php artisan make:controller Queue/SeckillActivityController
+```

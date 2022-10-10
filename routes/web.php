@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Queue\SeckillActivityController;
 use App\Http\Controllers\Queue\SendMailDatabaseController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,11 @@ Route::get('foo', function () {
 
 // 队列路由
 Route::post('queue/mail/database',[SendMailDatabaseController::class, 'store']);
+
+/**
+ * Redis秒杀
+ */
+//初始化秒杀活动
+Route::get('queue/seckill/index',[SeckillActivityController::class, 'index']);
+Route::get('queue/seckill/start',[SeckillActivityController::class, 'start']);
+
