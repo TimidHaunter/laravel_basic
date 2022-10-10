@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Queue\SeckillActivityController;
 use App\Http\Controllers\Queue\SendMailDatabaseController;
+use App\Http\Controllers\Redis\RedisHyperController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,3 +35,7 @@ Route::post('queue/mail/database',[SendMailDatabaseController::class, 'store']);
 Route::get('queue/seckill/index',[SeckillActivityController::class, 'index']);
 Route::get('queue/seckill/start',[SeckillActivityController::class, 'start']);
 
+/**
+ * Redis HyperLogLog引用
+ */
+Route::get('redis/hyper/add',[RedisHyperController::class, 'add']);
