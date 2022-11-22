@@ -658,3 +658,11 @@ php artisan queue:listen
 ```shell
 php artisan make:controller Queue/SeckillActivityController
 ```
+
+# ElasticSearch
+```shell
+##换源
+composer config -g repo.packagist composer https://packagist.org
+##安装插件
+composer require 'elasticsearch/elasticsearch'
+```

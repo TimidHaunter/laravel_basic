@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Es\EsController;
 use App\Http\Controllers\Queue\SeckillActivityController;
 use App\Http\Controllers\Queue\SendMailDatabaseController;
+use App\Http\Controllers\Redis\RedisController;
 use App\Http\Controllers\Redis\RedisHyperController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +38,14 @@ Route::get('queue/seckill/index',[SeckillActivityController::class, 'index']);
 Route::get('queue/seckill/start',[SeckillActivityController::class, 'start']);
 
 /**
- * Redis HyperLogLog引用
+ * Redis 未完成
  */
+//测试Redis链接
+Route::get('redis/test',[RedisController::class, 'test']);
+//HyperLogLog引用
 Route::get('redis/hyper/add',[RedisHyperController::class, 'add']);
+
+/**
+ * Elasticsearch
+ */
+Route::get('es/test',[EsController::class, 'test']);

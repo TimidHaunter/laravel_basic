@@ -6,7 +6,9 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "ext-json": "*",
         "dingo/api": "^3.0",
+        "elasticsearch/elasticsearch": "^8.5",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "iidestiny/laravel-filesystem-oss": "^2.1",
@@ -18,8 +20,7 @@
         "overtrue/easy-sms": "^2.0",
         "predis/predis": "^1.1",
         "spatie/laravel-permission": "^5.4",
-        "tymon/jwt-auth": "^1.0",
-        "ext-json": "*"
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
