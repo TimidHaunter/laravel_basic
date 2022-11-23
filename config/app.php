@@ -179,6 +179,8 @@ return [
         // jwt
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
+        // Scout
+        //Laravel\Scout\ScoutServiceProvider::class,
     ],
 
     /*

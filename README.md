@@ -661,15 +661,21 @@ php artisan make:controller Queue/SeckillActivityController
 
 # ElasticSearch
 ```shell
-##换源
+##1.换源
 composer config -g repo.packagist composer https://packagist.org
-##安装插件
-composer require 'elasticsearch/elasticsearch'
+##2.安装插件
+composer require elasticsearch/elasticsearch
 ```
 
 # Scout 全文搜索
 http://laravel.p2hp.com/cndocs/5.4/scout?cpo=11
 ```shell
-##使用 composer 包管理器来安装 Scout
+##3.使用 composer 包管理器来安装 Scout
 composer require laravel/scout
+
+##4.
+php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"
+
+##5.
+composer require tamayo/laravel-scout-elastic
 ```
