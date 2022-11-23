@@ -666,3 +666,10 @@ composer config -g repo.packagist composer https://packagist.org
 ##安装插件
 composer require 'elasticsearch/elasticsearch'
 ```
+
+# Scout 全文搜索
+http://laravel.p2hp.com/cndocs/5.4/scout?cpo=11
+```shell
+##使用 composer 包管理器来安装 Scout
+composer require laravel/scout
+```
